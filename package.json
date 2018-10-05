@@ -1,0 +1,36 @@
+{
+  "name": "spam-to-defend",
+  "version": "1.0.0",
+  "description": "[Open Jam 2018](https://itch.io/jam/open-jam-2018) - SPAM TO WIN!",
+  "main": "./index.html",
+  "dependencies": {
+    "pixi.js": "^4.8.2"
+  },
+  "devDependencies": {
+    "@types/pixi.js": "^4.8.1",
+    "ts-loader": "^5.2.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "scripts": {
+    "build:dev": "npm run webpack -- --env.mode development",
+    "webpack": "webpack",
+    "webpack-dev-server": "webpack-dev-server --env.mode development --open",
+    "dev": "npm run webpack-dev-server",
+    "start" : "npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tarkiflettes/Spam-to-defend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tarkiflettes/Spam-to-defend/issues"
+  },
+  "homepage": "https://github.com/Tarkiflettes/Spam-to-defend#readme"
+}

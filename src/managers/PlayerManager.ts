@@ -12,7 +12,7 @@ export class PlayerManager {
         this.coins = 1000;
 
         GameManager.currentView.on("mousedown", this.onMouseDown.bind(this));
-        
+
         window.addEventListener(
             "keydown", this.keydownHandler.bind(this), false
         );

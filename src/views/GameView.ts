@@ -1,5 +1,6 @@
 import { Container } from "pixi.js"
 import { Element } from "../models/Element"
+import { Collision } from "../utils/Collision";
 
 export class GameView extends Container {
 
@@ -15,19 +16,22 @@ export class GameView extends Container {
     }
 
     public addDefense(element: Element, x: number, y: number): boolean {
-        if (this.checkChildrenContainsPoint(x, y))
-            return false;
         element.x = x;
         element.y = y;
+
+        if (this.checkChildrenContainsPoint(element))
+            return false;
+
         this.addChild(element);
         return true;
     }
 
-    private checkChildrenContainsPoint(x: number, y: number): boolean {
-        this.children.forEach(function (child) {
-            if (child.hitArea !== undefined && child.hitArea !== null && child.hitArea.contains(x, y))
+    private checkChildrenContainsPoint(element: Element): boolean {
+        for (let i = 0, len = this.children.length; i < len; i++) {
+            let child = this.children[i];
+            if (Collision.boxesIntersect(child, element))
                 return true;
-        });
+        }
         return false;
     }
 

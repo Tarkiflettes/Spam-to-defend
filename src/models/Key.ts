@@ -1,6 +1,7 @@
 
 export class Key {
 
+    public char: string;
     public code: number;
     public isDown: boolean = false;
     public isUp: boolean = true;
@@ -9,6 +10,7 @@ export class Key {
     public release: any = undefined;
 
     constructor(code: string, press: any, release: any) {
+        this.char = code.charAt(0)
         this.code = code.charCodeAt(0);
         this.press = press;
         this.release = release;

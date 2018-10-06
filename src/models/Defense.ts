@@ -3,8 +3,8 @@ import { Key } from "./Key";
 
 export abstract class Defense extends Element {
 
-    private key: Key;
-    private price: number = 10;
+    protected key: Key;
+    protected price: number = 10;
     static usedKeys: Key[];
 
     constructor() {

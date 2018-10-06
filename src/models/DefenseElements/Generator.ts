@@ -1,6 +1,6 @@
-import { Defense } from "./Defense";
+import { Defense } from "../Defense";
 
-export class Tower extends Defense {
+export class Generator extends Defense {
 
     constructor() {
         super();
@@ -8,6 +8,15 @@ export class Tower extends Defense {
         var rect = new PIXI.Graphics();
         rect.beginFill(0x709FE9, 1);
         rect.drawRect(-10, -10, 20, 20);
+
+        var style = new PIXI.TextStyle({
+            fontSize: 10,
+        })
+        var key = new PIXI.Text(this.key.char, style);
+        key.x = -5;
+        key.y = -5;
+
+        rect.addChild(key)
 
         this.addChild(rect);
     }

@@ -6,7 +6,11 @@ class Main {
     private renderer: pixi.CanvasRenderer | pixi.WebGLRenderer;
 
     constructor() {
-        this.renderer = pixi.autoDetectRenderer(340, 480, { backgroundColor: 0x1099bb });
+        this.renderer = pixi.autoDetectRenderer(340, 480,
+            {
+                backgroundColor: 0x1099bb,
+                antialias: true
+            });
         this.stage = new pixi.Container();
 
         document.body.appendChild(this.renderer.view);

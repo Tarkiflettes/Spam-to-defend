@@ -1,5 +1,6 @@
 import { Element } from "./Element";
 import { Key } from "./Key";
+import { random } from "../Utils/Math";
 
 export abstract class Defense extends Element {
 
@@ -38,7 +39,7 @@ export abstract class Defense extends Element {
     }
 
     private randomLetter(): string {
-        return String.fromCharCode(Math.floor(Math.random() * 25) + 65);
+        return String.fromCharCode(random(65, 90));
     }
 
 }

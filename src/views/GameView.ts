@@ -2,6 +2,7 @@ import { Container, ticker } from "pixi.js"
 import { Element } from "../models/Element"
 import { Collision } from "../utils/Collision";
 import { Castle } from "../models/DefenseElements/Castle";
+import { Enemy } from "../models/Enemy";
 
 export class GameView extends Container {
 
@@ -46,6 +47,10 @@ export class GameView extends Container {
 
         this.addChild(element);
         return true;
+    }
+
+    public addEnemy(enemy: Enemy): void {
+        this.addChild(enemy);
     }
 
     private checkChildrenContainsPoint(element: Element): boolean {

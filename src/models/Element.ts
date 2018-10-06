@@ -1,4 +1,4 @@
-import { Container } from "pixi.js"
+import { Container, interaction } from "pixi.js"
 
 export abstract class Element extends Container {
 
@@ -6,10 +6,12 @@ export abstract class Element extends Container {
 
     constructor() {
         super();
+
+        this.interactive = true;
     }
 
     public destroy(): void {
         super.destroy();
     }
-    
+
 }

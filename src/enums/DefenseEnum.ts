@@ -1,6 +1,6 @@
 export enum DefenseEnum {
     Tower,
-    Worker,
     Generator,
+    Worker,
     Wall,
 }

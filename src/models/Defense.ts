@@ -4,10 +4,14 @@ import { Key } from "./Key";
 export abstract class Defense extends Element {
 
     private key: Key;
+    private price: number = 10;
     static usedKeys: Key[];
 
     constructor() {
         super();
+        if (Defense.usedKeys === undefined)
+            Defense.usedKeys = new Array();
+
         this.key = new Key(this.randomLetter(), this.keydownHandler, undefined);
         Defense.usedKeys.push(this.key);
     }

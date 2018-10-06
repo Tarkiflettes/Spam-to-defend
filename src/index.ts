@@ -1,27 +1,42 @@
 import * as pixi from "pixi.js";
+import { GameManager } from "./managers/GameManager"
 
 class Main {
 
     private stage: pixi.Container;
     private renderer: pixi.CanvasRenderer | pixi.WebGLRenderer;
+    private gameManager: GameManager;
 
     constructor() {
-        this.renderer = pixi.autoDetectRenderer(340, 480,
+        this.renderer = pixi.autoDetectRenderer(window.innerWidth, window.innerHeight,
             {
                 backgroundColor: 0x1099bb,
                 antialias: true
             });
-        this.stage = new pixi.Container();
+
+        this.gameManager = new GameManager();
+        this.stage = GameManager.currentView;
 
         document.body.appendChild(this.renderer.view);
+
+        window.addEventListener("resize", this.onResize.bind(this));
+
+        this.render();
     }
 
-    public render() {
+    private render(): void {
         this.renderer.render(this.stage);
-        window.requestAnimationFrame(this.render);
+        window.requestAnimationFrame(this.render.bind(this));
+    }
+
+    private onResize(): void {
+        this.renderer.resize(window.innerWidth, window.innerHeight);
     }
 
 }
 
-const main = new Main();
-main.render();
+window.onload = () => onLoad();
+
+function onLoad(): void {
+    const main = new Main();
+}

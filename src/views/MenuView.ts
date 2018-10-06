@@ -1,4 +1,4 @@
-import { Container, Sprite } from "pixi.js"
+import { Container } from "pixi.js"
 
 export class MenuView extends Container {
 

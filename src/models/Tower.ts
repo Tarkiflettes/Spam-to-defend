@@ -7,7 +7,9 @@ export class Tower extends Defense {
 
         var rect = new PIXI.Graphics();
         rect.beginFill(0x709FE9, 1);
-        rect.drawRect(20, 20, 100, 100);
+        rect.drawRect(-10, -10, 20, 20);
+
+        this.addChild(rect);
     }
 
     public destroy(): void {

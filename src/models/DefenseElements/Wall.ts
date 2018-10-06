@@ -5,9 +5,10 @@ export class Wall extends Defense {
     constructor() {
         super();
 
+        let size = 20;
         var rect = new PIXI.Graphics();
         rect.beginFill(0xf1c40f, 1);
-        rect.drawRect(-10, -10, 20, 20);
+        rect.drawRect(-size/2, -size/2, size, size);
 
         var style = new PIXI.TextStyle({
             fontSize: 10,

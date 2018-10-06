@@ -15,10 +15,10 @@ export class Key {
         this.press = press;
         this.release = release;
         window.addEventListener(
-            "keydown", this.keydownHandler, false
+            "keydown", this.keydownHandler.bind(this), false
         );
         window.addEventListener(
-            "keyup", this.keyupHandler, false
+            "keyup", this.keyupHandler.bind(this), false
         );
     }
 

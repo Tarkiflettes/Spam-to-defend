@@ -3,16 +3,19 @@ import { Key } from "./Key";
 
 export abstract class Defense extends Element {
 
-    protected key: Key;
-    public price: number = 10;
     static usedKeys: Key[];
+
+    public price: number = 10;
+    public timeToReload = 5 * 1000; // delayInMilliseconds
+    protected key: Key;
+    private canBeUsed: boolean = true;
 
     constructor() {
         super();
         if (Defense.usedKeys === undefined)
             Defense.usedKeys = new Array();
 
-        this.key = new Key(this.randomLetter(), this.keydownHandler, undefined);
+        this.key = new Key(this.randomLetter(), this.keydownHandler.bind(this), undefined);
         Defense.usedKeys.push(this.key);
     }
 
@@ -27,7 +30,11 @@ export abstract class Defense extends Element {
     abstract active(): void;
 
     private keydownHandler(): void {
+        if (!this.canBeUsed)
+            return;
+        this.canBeUsed = false;
         this.active();
+        setTimeout(() => this.canBeUsed = true, this.timeToReload);
     }
 
     private randomLetter(): string {

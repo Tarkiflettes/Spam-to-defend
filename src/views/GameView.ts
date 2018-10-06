@@ -1,10 +1,12 @@
 import { Container, ticker } from "pixi.js"
 import { Element } from "../models/Element"
 import { Collision } from "../utils/Collision";
+import { Castle } from "../models/DefenseElements/Castle";
 
 export class GameView extends Container {
 
     private ticker: ticker.Ticker;
+    private castle: Castle;
 
     constructor() {
         super();
@@ -12,6 +14,11 @@ export class GameView extends Container {
         this.interactive = true;
 
         this.hitArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
+
+        this.castle = new Castle();
+        this.castle.x = window.innerWidth / 2;
+        this.castle.y = window.innerHeight / 2;
+        this.addChild(this.castle);
 
         this.ticker = new ticker.Ticker();
         this.ticker.add(this.update.bind(this));

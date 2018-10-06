@@ -5,9 +5,10 @@ export class Generator extends Defense {
     constructor() {
         super();
 
+        let size = 20;
         var rect = new PIXI.Graphics();
         rect.beginFill(0x709FE9, 1);
-        rect.drawRect(-10, -10, 20, 20);
+        rect.drawRect(-size/2, -size/2, size, size);
 
         var style = new PIXI.TextStyle({
             fontSize: 10,

@@ -14,4 +14,7 @@ export abstract class Element extends Container {
         super.destroy();
     }
 
+    public update(deltatime: number): void {
+    }
+
 }

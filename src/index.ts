@@ -21,7 +21,7 @@ class Main {
 
         window.addEventListener("resize", this.onResize.bind(this));
 
-        this.render();
+        window.requestAnimationFrame(this.render.bind(this));
     }
 
     private render(): void {

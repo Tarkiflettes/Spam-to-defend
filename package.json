@@ -1,6 +1,6 @@
 {
   "name": "spam-to-defend",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "[Open Jam 2018](https://itch.io/jam/open-jam-2018) - SPAM TO WIN!",
   "main": "./index.html",
   "dependencies": {

@@ -6,8 +6,9 @@ import { Enemy } from "../models/Enemy";
 
 export class GameView extends Container {
 
-    private ticker: ticker.Ticker;
     public castle: Castle;
+    
+    private ticker: ticker.Ticker;
 
     constructor() {
         super();
@@ -20,6 +21,10 @@ export class GameView extends Container {
         this.castle.x = window.innerWidth / 2;
         this.castle.y = window.innerHeight / 2;
         this.addChild(this.castle);
+
+        this.ticker = new ticker.Ticker();
+        this.ticker.add(this.update.bind(this));
+        this.ticker.start();
 
         this.ticker = new ticker.Ticker();
         this.ticker.add(this.update.bind(this));

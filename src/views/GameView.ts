@@ -7,7 +7,7 @@ import { Enemy } from "../models/Enemy";
 export class GameView extends Container {
 
     private ticker: ticker.Ticker;
-    private castle: Castle;
+    public castle: Castle;
 
     constructor() {
         super();

@@ -1,5 +1,6 @@
 import { Element } from "./Element";
 import { Transform } from "../utils/Transform";
+import { GameManager } from "../managers/GameManager";
 
 export class Enemy extends Element {
 
@@ -15,12 +16,18 @@ export class Enemy extends Element {
         circle.drawCircle(-size / 4, -size / 4, size);
 
         this.addChild(circle);
-
-        Transform.rotate(this, 90)
     }
 
     public destroy(): void {
         super.destroy();
+    }
+
+    public start(): void {
+        let angleToCastle = Transform.angleBetweenTwoObject(this, GameManager.currentView.castle);
+        console.log(this.x + " : "+ this.y);
+        console.log(GameManager.currentView.castle.x + " : "+ GameManager.currentView.castle.y);
+        console.log(angleToCastle);
+        Transform.rotate(this, angleToCastle)
     }
 
     public update(deltatime: number): void {

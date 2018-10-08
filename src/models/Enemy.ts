@@ -6,6 +6,7 @@ export class Enemy extends Element {
 
     public force: number = 1;
     public speed: number = 2;
+    private moving: boolean = true;
 
     constructor() {
         super();
@@ -24,15 +25,16 @@ export class Enemy extends Element {
 
     public start(): void {
         let angleToCastle = Transform.angleBetweenTwoObject(this, GameManager.currentView.castle);
-        console.log(this.x + " : "+ this.y);
-        console.log(GameManager.currentView.castle.x + " : "+ GameManager.currentView.castle.y);
-        console.log(angleToCastle);
         Transform.rotate(this, angleToCastle)
     }
 
     public update(deltatime: number): void {
-        super.update(deltatime);
-        Transform.moveForward(this, this.speed);
+        if (this.moving)
+            Transform.moveForward(this, this.speed * deltatime);
+    }
+
+    public onCollision(element: Element): void {
+        this.moving = false;
     }
 
 }

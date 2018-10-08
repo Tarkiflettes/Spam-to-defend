@@ -14,7 +14,10 @@ export abstract class Element extends Container {
         super.destroy();
     }
 
-    public update(deltatime: number): void {
-    }
+    public abstract onCollision(element: Element): void;
+
+    public abstract start(): void;
+
+    public abstract update(deltatime: number): void;
 
 }

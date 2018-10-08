@@ -16,4 +16,10 @@ export class Transform {
         return dregree ? radianToDegree(Math.atan2(o2.y - o1.y, o2.x - o1.x)) : Math.atan2(o2.y - o1.y, o2.x - o1.x);
     }
 
+    public static distanceBetweenTwoObject(o1: Container, o2: Container): number {
+        var a = o1.x - o2.x;
+        var b = o1.y - o2.y;
+        return Math.sqrt(a * a + b * b);
+    }
+
 }

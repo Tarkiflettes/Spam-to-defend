@@ -1,4 +1,5 @@
 import { Defense } from "../Defense";
+import { Element } from "../Element"
 
 export class Generator extends Defense {
 
@@ -27,6 +28,15 @@ export class Generator extends Defense {
     }
 
     active(): void {
+    }
+
+    public start(): void {
+    }
+    
+    public update(deltatime: number): void {
+    }
+
+    public onCollision(element: Element): void {
     }
 
 }

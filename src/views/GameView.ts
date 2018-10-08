@@ -36,6 +36,15 @@ export class GameView extends Container {
                 child.update(deltatime);
             }
         }
+
+        for (let i = 0, len = this.children.length; i < len; i++) {
+            let child = this.children[i] as Element;
+            for (let j = 0, len = this.children.length; j < len; j++) {
+                let child2 = this.children[j] as Element;
+                if (child !== child2 && Collision.boxesIntersect(child, child2))
+                    child.onCollision(child2);
+            }
+        }
     }
 
     public addDefense(element: Element, x: number, y: number): boolean {

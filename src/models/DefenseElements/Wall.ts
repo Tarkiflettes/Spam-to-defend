@@ -36,7 +36,4 @@ export class Wall extends Defense {
     public update(deltatime: number): void {
     }
 
-    public onCollision(element: Element): void {
-    }
-
 }

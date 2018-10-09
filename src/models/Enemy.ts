@@ -6,7 +6,6 @@ export class Enemy extends Element {
 
     public force: number = 1;
     public speed: number = 2;
-    private moving: boolean = true;
 
     constructor() {
         super();
@@ -29,12 +28,9 @@ export class Enemy extends Element {
     }
 
     public update(deltatime: number): void {
-        if (this.moving)
+        var defense = GameManager.currentView.collideDefense(this);
+        if (defense == undefined)
             Transform.moveForward(this, this.speed * deltatime);
-    }
-
-    public onCollision(element: Element): void {
-        this.moving = false;
     }
 
 }

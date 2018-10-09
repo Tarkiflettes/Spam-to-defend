@@ -6,8 +6,8 @@ import { random } from "../Utils/Math";
 export class AIManager {
 
     constructor() {
-        var interval = setInterval(this.spawnIA.bind(this), 1000);
-        // this.spawnIA();
+        // var interval = setInterval(this.spawnIA.bind(this), 1000);
+        this.spawnIA();
     }
 
     public destroy(): void {

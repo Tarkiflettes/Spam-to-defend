@@ -35,8 +35,5 @@ export class Generator extends Defense {
     
     public update(deltatime: number): void {
     }
-
-    public onCollision(element: Element): void {
-    }
-
+    
 }

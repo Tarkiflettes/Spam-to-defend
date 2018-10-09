@@ -36,7 +36,4 @@ export class Worker extends Defense {
     public update(deltatime: number): void {
     }
 
-    public onCollision(element: Element): void {
-    }
-
 }

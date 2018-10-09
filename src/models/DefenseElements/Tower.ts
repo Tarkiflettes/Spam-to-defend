@@ -1,5 +1,4 @@
 import { Defense } from "../Defense";
-import { Element } from "../Element"
 
 export class Tower extends Defense {
 

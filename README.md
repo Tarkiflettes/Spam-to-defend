@@ -14,6 +14,12 @@ https://crowdforge.io/jams/open-jam/teams/2373
 
 ## Controls
 
+* Left click: Place a defense
+* 1: Tower
+* 2: Generator
+* 3: Worker
+* 4: Wall
+
 ## Installation
 
 ```

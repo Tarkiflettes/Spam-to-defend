@@ -1,8 +1,8 @@
-import { Container, interaction } from "pixi.js"
+import { Container } from "pixi.js"
 
 export abstract class Element extends Container {
 
-    private life: number = 100;
+    protected life: number = 100;
 
     constructor() {
         super();
@@ -12,6 +12,16 @@ export abstract class Element extends Container {
 
     public destroy(): void {
         super.destroy();
+    }
+
+    public takeDamage(amount: number): void {
+        if (amount < 0) amount = 0;
+        this.life -= amount;
+        if (this.life <= 0)
+            this.die();
+    }
+
+    private die(): void {
     }
 
     public abstract start(): void;

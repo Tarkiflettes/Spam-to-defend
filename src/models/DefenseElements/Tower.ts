@@ -5,7 +5,7 @@ import { Transform } from "../../utils/Transform";
 
 export class Tower extends Defense {
 
-    public range: number = 20;
+    public range: number = 200;
     private target: Enemy | undefined;
 
     constructor() {

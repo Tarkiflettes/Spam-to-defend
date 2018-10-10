@@ -27,8 +27,10 @@ export class Enemy extends Element {
     }
 
     public start(): void {
-        let angleToCastle = Transform.angleBetweenTwoObject(this, GameManager.currentView.castle);
-        Transform.rotate(this, angleToCastle)
+        if (GameManager.currentView.castle != undefined) {
+            let angleToCastle = Transform.angleBetweenTwoObject(this, GameManager.currentView.castle);
+            Transform.rotate(this, angleToCastle)
+        }
     }
 
     public update(deltatime: number): void {

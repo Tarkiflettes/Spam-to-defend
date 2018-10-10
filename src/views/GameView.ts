@@ -8,7 +8,7 @@ import { Transform } from "../utils/Transform";
 
 export class GameView extends Container {
 
-    public castle: Castle;
+    public castle: Castle | undefined;
     public defense: Defense[];
     public enemies: Enemy[];
     private ticker: ticker.Ticker;
@@ -94,6 +94,7 @@ export class GameView extends Container {
     private removeElement(element: Element): void {
         if (element instanceof Castle) {
             let castle = element as Castle;
+            this.castle = undefined;
             // end game
         } else if (element instanceof Defense) {
             let defense = element as Defense;
@@ -125,7 +126,7 @@ export class GameView extends Container {
         for (let i = 0; i < this.enemies.length; i++) {
             let enemy = this.enemies[i];
             let distance = Transform.distanceBetweenTwoObject(element, enemy);
-            if (nearestEnemy === undefined || (range <= distance && distance < nearestDistance)) {
+            if (range >= distance && (nearestEnemy === undefined || distance < nearestDistance)) {
                 nearestEnemy = enemy;
                 nearestDistance = distance;
             }

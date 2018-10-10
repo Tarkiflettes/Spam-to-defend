@@ -1,10 +1,9 @@
 import { Element } from "./Element";
 import { Key } from "./Key";
 import { random } from "../Utils/Math";
+import { KeyFactory } from "../factories/KeyFactory";
 
 export abstract class Defense extends Element {
-
-    static usedKeys: Key[];
 
     public price: number = 10;
     public timeToReload = 5 * 1000; // delayInMilliseconds
@@ -13,19 +12,13 @@ export abstract class Defense extends Element {
 
     constructor() {
         super();
-        if (Defense.usedKeys === undefined)
-            Defense.usedKeys = new Array();
 
-        this.key = new Key(this.randomLetter(), this.keydownHandler.bind(this), undefined);
-        Defense.usedKeys.push(this.key);
+        this.key = KeyFactory.getKey(this.keydownHandler.bind(this), undefined);
     }
 
     public destroy(): void {
         super.destroy();
-        const index = Defense.usedKeys.indexOf(this.key, 0);
-        if (index > -1) {
-            Defense.usedKeys.splice(index, 1);
-        }
+        KeyFactory.freeKey(this.key);
     }
 
     abstract active(): void;

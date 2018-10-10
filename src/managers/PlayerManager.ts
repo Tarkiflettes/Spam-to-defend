@@ -28,8 +28,10 @@ export class PlayerManager {
 
     public setDefense(x: number, y: number): void {
         let newDefense = DefenseFactory.CreateDefense(this.selectedItem);
+        if (newDefense == undefined)
+            return;
         if (newDefense.price > this.coins)
-            return
+            return;
         let result = GameManager.currentView.addDefense(newDefense, x, y);
         if (result)
             this.coins -= newDefense.price;

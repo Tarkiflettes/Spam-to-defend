@@ -4,10 +4,14 @@ import { Tower } from "../models/DefenseElements/Tower"
 import { Generator } from "../models/DefenseElements/Generator";
 import { Worker } from "../models/DefenseElements/Worker";
 import { Wall } from "../models/DefenseElements/Wall";
+import { KeyFactory } from "./KeyFactory";
 
 export class DefenseFactory {
 
-    public static CreateDefense(defenseType: DefenseEnum): Defense {
+    public static CreateDefense(defenseType: DefenseEnum): Defense | undefined {
+
+        if (!KeyFactory.keyAvailable())
+            return undefined;
 
         if (defenseType === DefenseEnum.Tower) {
             return new Tower();
@@ -19,7 +23,7 @@ export class DefenseFactory {
             return new Wall();
         }
 
-        return new Tower;
+        return undefined;
     }
 
 }

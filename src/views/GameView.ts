@@ -4,6 +4,7 @@ import { Collision } from "../utils/Collision";
 import { Castle } from "../models/DefenseElements/Castle";
 import { Enemy } from "../models/Enemy";
 import { Defense } from "../models/Defense";
+import { Transform } from "../utils/Transform";
 
 export class GameView extends Container {
 
@@ -49,7 +50,7 @@ export class GameView extends Container {
     }
 
     public collideDefense(enemy: Enemy): Defense | Castle | undefined {
-        if (Collision.boxesIntersect(this.castle, enemy))
+        if (this.castle !== undefined && Collision.boxesIntersect(this.castle, enemy))
             return this.castle;
         for (let i = 0; i < this.defense.length; i++) {
             let defense = this.defense[i];
@@ -116,6 +117,20 @@ export class GameView extends Container {
                 return true;
         }
         return false;
+    }
+
+    public nearestEnemy(element: Element, range: number): Enemy | undefined {
+        let nearestEnemy: Enemy | undefined = undefined;
+        let nearestDistance: number = -1;
+        for (let i = 0; i < this.enemies.length; i++) {
+            let enemy = this.enemies[i];
+            let distance = Transform.distanceBetweenTwoObject(element, enemy);
+            if (nearestEnemy === undefined || (range <= distance && distance < nearestDistance)) {
+                nearestEnemy = enemy;
+                nearestDistance = distance;
+            }
+        }
+        return nearestEnemy;
     }
 
 }

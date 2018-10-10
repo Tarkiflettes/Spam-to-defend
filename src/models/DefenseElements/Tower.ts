@@ -1,6 +1,12 @@
 import { Defense } from "../Defense";
+import { GameManager } from "../../managers/GameManager";
+import { Enemy } from "../Enemy";
+import { Transform } from "../../utils/Transform";
 
 export class Tower extends Defense {
+
+    public range: number = 20;
+    private target: Enemy | undefined;
 
     constructor() {
         super();
@@ -9,7 +15,7 @@ export class Tower extends Defense {
         let size = 20;
         var rect = new PIXI.Graphics();
         rect.beginFill(0xe74c3c, 1);
-        rect.drawRect(-size/2, -size/2, size, size);
+        rect.drawRect(-size / 2, -size / 2, size, size);
 
         var style = new PIXI.TextStyle({
             fontSize: 10,
@@ -32,8 +38,20 @@ export class Tower extends Defense {
 
     public start(): void {
     }
-    
+
     public update(deltatime: number): void {
+        if (this.target !== undefined) {
+            this.aimTheTarget();
+        } else {
+            this.target = GameManager.currentView.nearestEnemy(this, this.range);
+        }
+    }
+
+    private aimTheTarget(): void {
+        if (this.target === undefined)
+            return;
+        let angleToCastle = Transform.angleBetweenTwoObject(this, this.target);
+        Transform.rotate(this, angleToCastle)
     }
 
 }

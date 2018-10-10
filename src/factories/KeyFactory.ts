@@ -7,7 +7,6 @@ export class KeyFactory {
     private static usedKeys: Key[] = new Array();
 
     public static getKey(press: any, release: any): Key {
-        // console.log(this.availableKey.length);
         let key = new Key(this.randomLetter(), press, release);
         let index = this.availableKey.indexOf(key.char);
         if (index > -1)

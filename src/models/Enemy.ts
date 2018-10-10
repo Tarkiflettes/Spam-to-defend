@@ -8,7 +8,7 @@ export class Enemy extends Element {
 
     public force: number = 1;
     public speed: number = 2;
-    public timeToReload = 5 * 1000; // delayInMilliseconds
+    public timeToReload = 1 * 1000; // delayInMilliseconds
     private canAttack: boolean = true;
 
     constructor() {

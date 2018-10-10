@@ -25,7 +25,7 @@ export class GameView extends Container {
         this.castle = new Castle();
         this.castle.x = window.innerWidth / 2;
         this.castle.y = window.innerHeight / 2;
-        this.addChild(this.castle);
+        this.addElement(this.castle);
 
         this.ticker = new ticker.Ticker();
         this.ticker.add(this.update.bind(this));
@@ -40,9 +40,9 @@ export class GameView extends Container {
     }
 
     private update(deltatime: number): void {
-        for (let i = 0, len = this.children.length; i < len; i++) {
+        for (let i = 0; i < this.children.length; i++) {
             let child = this.children[i] as Element;
-            if (typeof child.update === "function") {
+            if (child !== undefined && typeof child.update === "function") {
                 child.update(deltatime);
             }
         }
@@ -51,7 +51,7 @@ export class GameView extends Container {
     public collideDefense(enemy: Enemy): Defense | Castle | undefined {
         if (Collision.boxesIntersect(this.castle, enemy))
             return this.castle;
-        for (let i = 0, len = this.defense.length; i < len; i++) {
+        for (let i = 0; i < this.defense.length; i++) {
             let defense = this.defense[i];
             if (Collision.boxesIntersect(defense, enemy))
                 return defense;
@@ -60,7 +60,7 @@ export class GameView extends Container {
     }
 
     public collideEnemy(defense: Defense): Enemy | undefined {
-        for (let i = 0, len = this.enemies.length; i < len; i++) {
+        for (let i = 0; i < this.enemies.length; i++) {
             let enemy = this.enemies[i];
             if (Collision.boxesIntersect(defense, enemy))
                 return enemy;
@@ -75,18 +75,42 @@ export class GameView extends Container {
         if (this.checkChildrenContainsPoint(defense))
             return false;
 
-        this.addChild(defense);
+        this.addElement(defense);
         this.defense.push(defense);
         return true;
     }
 
     public addEnemy(enemy: Enemy): void {
         this.enemies.push(enemy);
-        this.addChild(enemy);
+        this.addElement(enemy);
+    }
+
+    private addElement(element: Element): void {
+        this.addChild(element);
+        element.dieHandler.on(this.removeElement.bind(this));
+    }
+
+    private removeElement(element: Element): void {
+        if (element instanceof Castle) {
+            let castle = element as Castle;
+            // end game
+        } else if (element instanceof Defense) {
+            let defense = element as Defense;
+            let index = this.defense.indexOf(defense);
+            if (index > -1)
+                this.defense.splice(index, 1);
+        } else if (element instanceof Enemy) {
+            let enemy = element as Enemy;
+            let index = this.enemies.indexOf(enemy);
+            if (index > -1)
+                this.enemies.splice(index, 1);
+        }
+        this.removeChild(element);
+        element.destroy();
     }
 
     private checkChildrenContainsPoint(element: Element): boolean {
-        for (let i = 0, len = this.children.length; i < len; i++) {
+        for (let i = 0; i < this.children.length; i++) {
             let child = this.children[i];
             if (Collision.boxesIntersect(child, element))
                 return true;

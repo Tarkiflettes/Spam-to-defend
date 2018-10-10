@@ -1,12 +1,15 @@
 import { Container } from "pixi.js"
+import { Event } from "../Event/Event";
 
 export abstract class Element extends Container {
 
+    public readonly dieHandler: Event;
     protected life: number = 100;
 
     constructor() {
         super();
 
+        this.dieHandler = new Event();
         this.interactive = true;
     }
 
@@ -22,6 +25,7 @@ export abstract class Element extends Container {
     }
 
     private die(): void {
+        this.dieHandler.trigger(this);
     }
 
     public abstract start(): void;

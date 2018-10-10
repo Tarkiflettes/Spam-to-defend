@@ -5,6 +5,7 @@ export class Tower extends Defense {
     constructor() {
         super();
 
+        this.life = 2;
         let size = 20;
         var rect = new PIXI.Graphics();
         rect.beginFill(0xe74c3c, 1);

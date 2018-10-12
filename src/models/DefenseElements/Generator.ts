@@ -1,7 +1,10 @@
 import { Defense } from "../Defense";
 import { Element } from "../Element"
+import { GameManager } from "../../managers/GameManager";
 
 export class Generator extends Defense {
+
+    public coins = 10;
 
     constructor() {
         super();
@@ -28,6 +31,7 @@ export class Generator extends Defense {
     }
 
     active(): void {
+        GameManager.playerManager.addCoins(this.coins);
     }
 
     public start(): void {

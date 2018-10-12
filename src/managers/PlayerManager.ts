@@ -31,6 +31,11 @@ export class PlayerManager {
         this.setDefense(event.data.global.x, event.data.global.y);
     }
 
+    public addCoins(amount: number): void {
+        this.coins += amount;
+        this.coinsHandler.trigger();
+    }
+
     public setDefense(x: number, y: number): void {
         let newDefense = DefenseFactory.CreateDefense(this.selectedItem);
         if (newDefense == undefined)

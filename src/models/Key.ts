@@ -23,7 +23,7 @@ export class Key {
     }
 
     private keydownHandler(event: any): void {
-        if (event.keyCode === this.code) {
+        if (event.key === this.char) {
             if (this.isUp && this.press && !typeof this.press !== undefined) this.press();
             this.isDown = true;
             this.isUp = false;
@@ -32,7 +32,7 @@ export class Key {
     }
 
     private keyupHandler(event: any): void {
-        if (event.keyCode === this.code) {
+        if (event.key === this.char) {
             if (this.isDown && this.release && !typeof this.release !== undefined) this.release();
             this.isDown = false;
             this.isUp = true;

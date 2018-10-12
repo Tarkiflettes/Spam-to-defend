@@ -8,11 +8,13 @@ export class PlayerManager {
 
     public coins: number;
     public readonly coinsHandler: Event;
+    public readonly selectedItemHandler: Event;
     public selectedItem: DefenseEnum = DefenseEnum.Tower;
 
     constructor() {
         this.coins = 1000;
         this.coinsHandler = new Event();
+        this.selectedItemHandler = new Event();
 
         GameManager.currentView.on("mousedown", this.onMouseDown.bind(this));
 
@@ -53,6 +55,7 @@ export class PlayerManager {
             this.selectedItem = DefenseEnum.Wall;
         }
         event.preventDefault();
+        this.selectedItemHandler.trigger();
     }
 
 }

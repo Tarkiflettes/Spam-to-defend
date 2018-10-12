@@ -27,8 +27,10 @@ export class UIManager extends Container {
 
         this.defenseItems = new Array();
         this.setDefenseItems();
+        this.onselectedItemChange();
 
         GameManager.playerManager.coinsHandler.on(this.onCoinsChange.bind(this));
+        GameManager.playerManager.selectedItemHandler.on(this.onselectedItemChange.bind(this));
     }
 
     public destroy(): void {
@@ -39,7 +41,6 @@ export class UIManager extends Container {
         for (let item in DefenseEnum) {
             if (!isNaN(Number(item)))
                 continue;
-            console.log(item);
             let newItem = new DefenseItem();
             newItem.x = currentX;
             newItem.y = options.height;
@@ -51,6 +52,14 @@ export class UIManager extends Container {
 
     private onCoinsChange(): void {
         this.coins.text = String(GameManager.playerManager.coins);
+    }
+
+    private onselectedItemChange() {
+        for (let i = 0; i < this.defenseItems.length; i++) {
+            let item = this.defenseItems[i];
+            item.unselect();
+        }
+        this.defenseItems[GameManager.playerManager.selectedItem].select();
     }
 
 }

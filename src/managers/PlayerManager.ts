@@ -2,14 +2,17 @@ import { interaction } from "pixi.js"
 import { GameManager } from "./GameManager"
 import { DefenseEnum } from "../enums/DefenseEnum"
 import { DefenseFactory } from "../factories/DefenseFactory";
+import { Event } from "../Event/Event";
 
 export class PlayerManager {
 
-    private selectedItem: DefenseEnum = DefenseEnum.Tower;
-    private coins: number;
+    public coins: number;
+    public readonly coinsHandler: Event;
+    public selectedItem: DefenseEnum = DefenseEnum.Tower;
 
     constructor() {
         this.coins = 1000;
+        this.coinsHandler = new Event();
 
         GameManager.currentView.on("mousedown", this.onMouseDown.bind(this));
 
@@ -33,8 +36,10 @@ export class PlayerManager {
         if (newDefense.price > this.coins)
             return;
         let result = GameManager.currentView.addDefense(newDefense, x, y);
-        if (result)
+        if (result) {
             this.coins -= newDefense.price;
+            this.coinsHandler.trigger();
+        }
     }
 
     private keydownHandler(event: any): void {

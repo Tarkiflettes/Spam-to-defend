@@ -1,5 +1,6 @@
 import * as pixi from "pixi.js";
 import { GameManager } from "./managers/GameManager"
+import { options } from "./utils/options";
 
 class Main {
 
@@ -8,7 +9,7 @@ class Main {
     private gameManager: GameManager;
 
     constructor() {
-        this.renderer = pixi.autoDetectRenderer(window.innerWidth, window.innerHeight,
+        this.renderer = pixi.autoDetectRenderer(options.width, options.height,
             {
                 backgroundColor: 0x1099bb,
                 antialias: true

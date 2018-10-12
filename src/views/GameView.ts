@@ -5,12 +5,15 @@ import { Castle } from "../models/DefenseElements/Castle";
 import { Enemy } from "../models/Enemy";
 import { Defense } from "../models/Defense";
 import { Transform } from "../utils/Transform";
+import { options } from "../utils/options";
+import { UIManager } from "../managers/UIManager";
 
 export class GameView extends Container {
 
     public castle: Castle | undefined;
     public defense: Defense[];
     public enemies: Enemy[];
+    public uiManager: UIManager | undefined;
     private ticker: ticker.Ticker;
 
     constructor() {
@@ -18,7 +21,7 @@ export class GameView extends Container {
 
         this.interactive = true;
 
-        this.hitArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
+        this.hitArea = new PIXI.Rectangle(0, 0, options.width, options.height);
 
         this.defense = [];
         this.enemies = [];
@@ -114,7 +117,7 @@ export class GameView extends Container {
     private checkChildrenContainsPoint(element: Element): boolean {
         for (let i = 0; i < this.children.length; i++) {
             let child = this.children[i];
-            if (Collision.boxesIntersect(child, element))
+            if (child !== this.uiManager && Collision.boxesIntersect(child, element))
                 return true;
         }
         return false;
@@ -132,6 +135,11 @@ export class GameView extends Container {
             }
         }
         return nearestEnemy;
+    }
+
+    public setUI(uiManager: UIManager): void {
+        this.uiManager = uiManager;
+        this.addChild(this.uiManager);
     }
 
 }

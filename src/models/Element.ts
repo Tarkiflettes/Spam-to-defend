@@ -8,7 +8,7 @@ export abstract class Element extends Container {
 
     constructor() {
         super();
-
+        
         this.dieHandler = new Event();
         this.interactive = true;
     }

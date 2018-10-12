@@ -4,11 +4,13 @@ import { Event } from "../Event/Event";
 export abstract class Element extends Container {
 
     public readonly dieHandler: Event;
-    protected life: number = 100;
+    protected maxHealth: number = 100;
+    private health: number;
 
     constructor() {
         super();
-        
+
+        this.health = this.maxHealth;
         this.dieHandler = new Event();
         this.interactive = true;
     }
@@ -17,10 +19,15 @@ export abstract class Element extends Container {
         super.destroy();
     }
 
+    public addHealth(amount: number): void {
+        this.health += amount;
+        if (this.health > this.maxHealth) this.health = this.maxHealth;
+    }
+
     public takeDamage(amount: number): void {
         if (amount < 0) amount = 0;
-        this.life -= amount;
-        if (this.life <= 0)
+        this.health -= amount;
+        if (this.health <= 0)
             this.die();
     }
 

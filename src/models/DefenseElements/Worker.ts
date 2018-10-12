@@ -1,6 +1,10 @@
 import { Defense } from "../Defense";
+import { GameManager } from "../../managers/GameManager";
 
 export class Worker extends Defense {
+
+    public regenerationHealth: number = 5;
+    public range: number = 50;
 
     constructor() {
         super();
@@ -8,7 +12,7 @@ export class Worker extends Defense {
         let size = 20;
         var rect = new PIXI.Graphics();
         rect.beginFill(0x8e44ad, 1);
-        rect.drawRect(-size/2, -size/2, size, size);
+        rect.drawRect(-size / 2, -size / 2, size, size);
 
         var style = new PIXI.TextStyle({
             fontSize: 10,
@@ -27,11 +31,16 @@ export class Worker extends Defense {
     }
 
     active(): void {
+        let defenseList = GameManager.currentView.nearestDefenseList(this, this.range);
+        for (let i = 0; i < defenseList.length; i++) {
+            let defense = defenseList[i];
+            defense.addHealth(this.regenerationHealth);
+        }
     }
 
     public start(): void {
     }
-    
+
     public update(deltatime: number): void {
     }
 

@@ -5,7 +5,7 @@ export class Castle extends Element {
     constructor() {
         super();
 
-        this.life = 1;
+        this.maxHealth = 1;
         let size = 50;
         var rect = new PIXI.Graphics();
         rect.beginFill(0x2c3e50, 1);

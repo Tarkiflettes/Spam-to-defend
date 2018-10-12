@@ -123,7 +123,7 @@ export class GameView extends Container {
         return false;
     }
 
-    public nearestEnemy(element: Element, range: number): Enemy | undefined {
+    public nearestEnemy(element: Element, range: number = Number.MAX_VALUE): Enemy | undefined {
         let nearestEnemy: Enemy | undefined = undefined;
         let nearestDistance: number = -1;
         for (let i = 0; i < this.enemies.length; i++) {
@@ -135,6 +135,17 @@ export class GameView extends Container {
             }
         }
         return nearestEnemy;
+    }
+
+    nearestDefenseList(element: Element, range: number = Number.MAX_VALUE): Defense[] {
+        let defenseList = new Array();
+        for (let i = 0; i < this.defense.length; i++) {
+            let defense = this.defense[i];
+            let distance = Transform.distanceBetweenTwoObject(element, defense);
+            if (distance <= range)
+                defenseList.push(defense);
+        }
+        return defenseList;
     }
 
     public setUI(uiManager: UIManager): void {

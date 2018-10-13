@@ -5,7 +5,7 @@ import { Castle } from "../models/DefenseElements/Castle";
 import { Enemy } from "../models/Enemy";
 import { Defense } from "../models/Defense";
 import { Transform } from "../utils/Transform";
-import { options } from "../utils/options";
+import { options } from "../options/Options";
 import { UIManager } from "../managers/UIManager";
 import { Bullet } from "../models/DefenseElements/Bullet";
 

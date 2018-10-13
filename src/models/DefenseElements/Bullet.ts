@@ -1,6 +1,7 @@
 import { Element } from "../Element";
 import { GameManager } from "../../managers/GameManager";
 import { Transform } from "../../utils/Transform";
+import { balancing } from "../../options/Balancing";
 
 export class Bullet extends Element {
 
@@ -10,8 +11,9 @@ export class Bullet extends Element {
     constructor() {
         super();
 
-        this.force = 2;
-        this.speed = 10;
+        let stats = balancing.element.defense.tower.bullet;
+        this.force = stats.force;
+        this.speed = stats.speed;
 
         let size = 5;
         var rect = new PIXI.Graphics();

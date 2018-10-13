@@ -1,12 +1,14 @@
 import { Element } from "../Element";
+import { balancing } from "../../options/Balancing";
 
 export class Castle extends Element {
 
     constructor() {
         super();
-
-        // this.setmaxHealth(1, true);
         
+        let stats = balancing.element.castle;
+        this.setmaxHealth(stats.maxHealth, true);
+
         let size = 50;
         var rect = new PIXI.Graphics();
         rect.beginFill(0x2c3e50, 1);

@@ -1,14 +1,20 @@
 import { Defense } from "../Defense";
-import { Element } from "../Element"
 import { GameManager } from "../../managers/GameManager";
+import { balancing } from "../../options/Balancing";
 
 export class Generator extends Defense {
 
-    public coins = 10;
+    public coins: number;
 
     constructor() {
         super();
 
+        let stats = balancing.element.defense.generator;
+        this.setmaxHealth(stats.maxHealth, true);
+        this.price = stats.price;
+        this.timeToReload = stats.timeToReload;
+        this.coins = stats.coins;
+        
         let size = 20;
         var rect = new PIXI.Graphics();
         rect.beginFill(0x709FE9, 1);

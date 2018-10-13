@@ -1,5 +1,5 @@
 import { Container } from "pixi.js";
-import { options } from "../utils/options";
+import { options } from "../options/Options";
 import { GameManager } from "./GameManager";
 import { DefenseItem } from "../ui/DefenseItem";
 import { DefenseEnum } from "../enums/DefenseEnum";

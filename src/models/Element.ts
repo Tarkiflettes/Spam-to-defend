@@ -1,15 +1,19 @@
 import { Container } from "pixi.js"
 import { Event } from "../Event/Event";
+import { balancing } from "../options/Balancing";
 
 export abstract class Element extends Container {
 
     public readonly dieHandler: Event;
-    protected maxHealth: number = 100;
+    protected maxHealth: number;
     private health: number;
 
     constructor() {
         super();
 
+        let stats = balancing.element;
+        this.maxHealth = stats.maxHealth;
+        
         this.health = this.maxHealth;
         this.dieHandler = new Event();
         this.interactive = true;

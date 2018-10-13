@@ -23,14 +23,14 @@ export class DefenseItem extends Container {
     public select(): void {
         this.rect.clear();
         this.rect.beginFill(0x34495e, 0.4);
-        this.rect.lineStyle(2, this.selectedLineColor, 1);
+        this.rect.lineStyle(2, this.selectedLineColor, 0.4);
         this.rect.drawRect(0, -50, 50, 50);
     }
 
     public unselect(): void {
         this.rect.clear();
         this.rect.beginFill(0x34495e, 0.4);
-        this.rect.lineStyle(2, this.lineColor, 1);
+        this.rect.lineStyle(2, this.lineColor, 0.4);
         this.rect.drawRect(0, -50, 50, 50);
     }
 

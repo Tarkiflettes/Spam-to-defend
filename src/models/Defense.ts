@@ -2,16 +2,22 @@ import { Element } from "./Element";
 import { Key } from "./Key";
 import { random } from "../Utils/Math";
 import { KeyFactory } from "../factories/KeyFactory";
+import { balancing } from "../options/Balancing";
 
 export abstract class Defense extends Element {
 
-    public price: number = 10;
-    public timeToReload = 5 * 1000; // delayInMilliseconds
+    public price: number;
+    public timeToReload: number; // delayInMilliseconds
     protected key: Key;
     private canBeUsed: boolean = true;
 
     constructor() {
         super();
+
+        let stats = balancing.element.defense;
+        this.setmaxHealth(stats.maxHealth, true);
+        this.price = stats.price;
+        this.timeToReload = stats.timeToReload;
 
         this.key = KeyFactory.getKey(this.keydownHandler.bind(this), undefined);
     }

@@ -3,16 +3,23 @@ import { Transform } from "../utils/Transform";
 import { GameManager } from "../managers/GameManager";
 import { Defense } from "./Defense";
 import { Castle } from "./DefenseElements/Castle";
+import { balancing } from "../options/Balancing";
 
 export class Enemy extends Element {
 
-    public force: number = 1;
-    public speed: number = 2;
-    public timeToReload = 1 * 1000; // delayInMilliseconds
+    public force: number;
+    public speed: number;
+    public timeToReload: number; // delayInMilliseconds
     private canAttack: boolean = true;
 
     constructor() {
         super();
+
+        let stats = balancing.element.enemy;
+        this.setmaxHealth(stats.maxHealth, true);
+        this.force = stats.force;
+        this.speed = stats.speed;
+        this.timeToReload = stats.timeToReload;
 
         let size = 10;
         var circle = new PIXI.Graphics();

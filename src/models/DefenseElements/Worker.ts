@@ -1,13 +1,21 @@
 import { Defense } from "../Defense";
 import { GameManager } from "../../managers/GameManager";
+import { balancing } from "../../options/Balancing";
 
 export class Worker extends Defense {
 
-    public regenerationHealth: number = 5;
-    public range: number = 50;
+    public regenerationHealth: number;
+    public range: number;
 
     constructor() {
         super();
+
+        let stats = balancing.element.defense.worker;
+        this.setmaxHealth(stats.maxHealth, true);
+        this.price = stats.price;
+        this.timeToReload = stats.timeToReload;
+        this.regenerationHealth = stats.regenerationHealth;
+        this.range = stats.range;
 
         let size = 20;
         var rect = new PIXI.Graphics();

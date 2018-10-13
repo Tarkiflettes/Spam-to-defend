@@ -1,12 +1,19 @@
 import { Defense } from "../Defense";
 import { GameManager } from "../../managers/GameManager";
+import { balancing } from "../../options/Balancing";
 
 export class Wall extends Defense {
 
-    public force: number = 50;
+    public force: number;
 
     constructor() {
         super();
+
+        let stats = balancing.element.defense.wall;
+        this.setmaxHealth(stats.maxHealth, true);
+        this.price = stats.price;
+        this.timeToReload = stats.timeToReload;
+        this.force = stats.force;
 
         let size = 20;
         var rect = new PIXI.Graphics();

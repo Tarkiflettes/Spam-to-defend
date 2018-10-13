@@ -1,6 +1,6 @@
 import * as pixi from "pixi.js";
 import { GameManager } from "./managers/GameManager"
-import { options } from "./utils/options";
+import { options } from "./options/Options";
 
 class Main {
 

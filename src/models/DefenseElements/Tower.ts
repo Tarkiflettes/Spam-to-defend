@@ -3,15 +3,22 @@ import { GameManager } from "../../managers/GameManager";
 import { Enemy } from "../Enemy";
 import { Transform } from "../../utils/Transform";
 import { Bullet } from "./Bullet";
+import { balancing } from "../../options/Balancing";
 
 export class Tower extends Defense {
 
-    public range: number = 200;
+    public range: number;
     private target: Enemy | undefined;
 
     constructor() {
         super();
 
+        let stats = balancing.element.defense.tower;
+        this.setmaxHealth(stats.maxHealth, true);
+        this.price = stats.price;
+        this.timeToReload = stats.timeToReload;
+        this.range = stats.range;
+        
         this.setmaxHealth(2, true);
 
         let size = 20;

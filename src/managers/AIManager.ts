@@ -1,6 +1,6 @@
 import { GameManager } from "./GameManager"
 import { Enemy } from "../models/Enemy";
-import { options } from "../utils/options";
+import { options } from "../options/Options";
 import { random } from "../Utils/Math";
 
 export class AIManager {

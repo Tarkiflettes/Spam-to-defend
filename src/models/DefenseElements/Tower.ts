@@ -2,6 +2,7 @@ import { Defense } from "../Defense";
 import { GameManager } from "../../managers/GameManager";
 import { Enemy } from "../Enemy";
 import { Transform } from "../../utils/Transform";
+import { Bullet } from "./Bullet";
 
 export class Tower extends Defense {
 
@@ -11,7 +12,8 @@ export class Tower extends Defense {
     constructor() {
         super();
 
-        this.maxHealth = 2;
+        this.setmaxHealth(2, true);
+
         let size = 20;
         var rect = new PIXI.Graphics();
         rect.beginFill(0xe74c3c, 1);
@@ -19,7 +21,7 @@ export class Tower extends Defense {
 
         var style = new PIXI.TextStyle({
             fontSize: 10,
-        })
+        });
         var key = new PIXI.Text(this.key.char, style);
         key.x = -5;
         key.y = -5;
@@ -34,6 +36,11 @@ export class Tower extends Defense {
     }
 
     active(): void {
+        let bullet = new Bullet();
+        bullet.x = this.x;
+        bullet.y = this.y;
+        bullet.rotation = this.rotation;
+        this.parent.addChild(bullet);
     }
 
     public start(): void {

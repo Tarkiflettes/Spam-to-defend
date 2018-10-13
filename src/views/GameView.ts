@@ -7,6 +7,7 @@ import { Defense } from "../models/Defense";
 import { Transform } from "../utils/Transform";
 import { options } from "../utils/options";
 import { UIManager } from "../managers/UIManager";
+import { Bullet } from "../models/DefenseElements/Bullet";
 
 export class GameView extends Container {
 
@@ -63,7 +64,7 @@ export class GameView extends Container {
         return undefined;
     }
 
-    public collideEnemy(defense: Defense): Enemy | undefined {
+    public collideEnemy(defense: Defense | Bullet): Enemy | undefined {
         for (let i = 0; i < this.enemies.length; i++) {
             let enemy = this.enemies[i];
             if (Collision.boxesIntersect(defense, enemy))
@@ -72,7 +73,7 @@ export class GameView extends Container {
         return undefined;
     }
 
-    public collideEnemies(defense: Defense): Enemy[] {
+    public collideEnemies(defense: Defense | Bullet): Enemy[] {
         let enemiesList = new Array();
         for (let i = 0; i < this.enemies.length; i++) {
             let enemy = this.enemies[i];

@@ -44,7 +44,13 @@ export class Tower extends Defense {
             this.aimTheTarget();
         } else {
             this.target = GameManager.currentView.nearestEnemy(this, this.range);
+            if (this.target !== undefined)
+                this.target.dieHandler.on(this.removeTarget.bind(this));
         }
+    }
+
+    private removeTarget(): void {
+        this.target = undefined;
     }
 
     private aimTheTarget(): void {

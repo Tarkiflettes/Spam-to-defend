@@ -72,6 +72,16 @@ export class GameView extends Container {
         return undefined;
     }
 
+    public collideEnemies(defense: Defense): Enemy[] {
+        let enemiesList = new Array();
+        for (let i = 0; i < this.enemies.length; i++) {
+            let enemy = this.enemies[i];
+            if (Collision.boxesIntersect(defense, enemy))
+                enemiesList.push(enemy);
+        }
+        return enemiesList;
+    }
+
     public addDefense(defense: Defense, x: number, y: number): boolean {
         defense.x = x;
         defense.y = y;

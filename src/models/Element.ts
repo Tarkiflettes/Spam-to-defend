@@ -31,6 +31,12 @@ export abstract class Element extends Container {
             this.die();
     }
 
+    public setmaxHealth(amount: number, reload: boolean = false): void {
+        this.maxHealth = amount;
+        if (reload)
+            this.health = this.maxHealth;
+    }
+
     private die(): void {
         this.dieHandler.trigger(this);
     }

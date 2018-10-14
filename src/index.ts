@@ -1,6 +1,7 @@
 import * as pixi from "pixi.js";
 import { GameManager } from "./managers/GameManager"
 import { options } from "./options/Options";
+import "../assets/styles/style.css";
 
 class Main {
 

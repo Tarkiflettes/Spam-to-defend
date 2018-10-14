@@ -1,5 +1,8 @@
 
 export var balancing = {
+    ia: {
+
+    },
     element: {
         maxHealth: 100,
         defense: {

@@ -8,6 +8,11 @@
   },
   "devDependencies": {
     "@types/pixi.js": "^4.8.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "style-loader": "^0.23.1",
     "ts-loader": "^5.2.1",
     "tslint": "^5.11.0",
     "typescript": "^3.1.1",
@@ -16,11 +21,13 @@
     "webpack-dev-server": "^3.1.9"
   },
   "scripts": {
+    "prebuild": "npm run clean",
+    "build": "webpack --mode=production",
     "build:dev": "npm run webpack -- --env.mode development",
     "webpack": "webpack",
     "webpack-dev-server": "webpack-dev-server --env.mode development --open",
     "dev": "npm run webpack-dev-server",
-    "start" : "npm run dev",
+    "start": "npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -21,7 +21,6 @@
     "webpack-dev-server": "^3.1.9"
   },
   "scripts": {
-    "prebuild": "npm run clean",
     "build": "webpack --mode=production",
     "build:dev": "npm run webpack -- --env.mode development",
     "webpack": "webpack",

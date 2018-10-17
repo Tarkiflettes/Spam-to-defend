@@ -3,6 +3,7 @@ import { GameManager } from "./GameManager"
 import { DefenseEnum } from "../enums/DefenseEnum"
 import { DefenseFactory } from "../factories/DefenseFactory";
 import { Event } from "../Event/Event";
+import { balancing } from "../options/Balancing";
 
 export class PlayerManager {
 
@@ -12,7 +13,9 @@ export class PlayerManager {
     public selectedItem: DefenseEnum = DefenseEnum.Tower;
 
     constructor() {
-        this.coins = 1000;
+
+        this.coins = balancing.coins;
+        
         this.coinsHandler = new Event();
         this.selectedItemHandler = new Event();
 

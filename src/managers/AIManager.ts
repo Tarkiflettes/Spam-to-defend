@@ -2,19 +2,20 @@ import { GameManager } from "./GameManager"
 import { Enemy } from "../models/Enemy";
 import { options } from "../options/Options";
 import { random } from "../Utils/Math";
+import { balancing } from "../options/Balancing";
 
 export class AIManager {
 
     constructor() {
-        // var interval = setInterval(this.spawnIA.bind(this), 1000);
-        this.spawnIA();
+        var interval = setInterval(this.spawnIA.bind(this), balancing.ia.interval);
+        // this.spawnIA();
     }
 
     public destroy(): void {
     }
 
     private randomSpawn(): void {
-        let spawn = random(0, 20);
+        let spawn = random(0, balancing.ia.random);
         if (spawn != 0)
             return;
         this.spawnIA();

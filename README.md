@@ -1,9 +1,13 @@
 # Spam-to-defend
 
+[![Build status](https://lioneljouin.visualstudio.com/Spam-To-Defend/_apis/build/status/Spam-To-Defend-CI)](https://lioneljouin.visualstudio.com/Spam-To-Defend/_build/latest?definitionId=2)
+
 [Open Jam 2018](https://itch.io/jam/open-jam-2018) - SPAM TO WIN!
 
 Team tarkiflettes:
 https://crowdforge.io/jams/open-jam/teams/2373
+
+Master branch of this project is automatically deployed on an Azure WebApp thanks to Team Foundation Server.
 
 ## Open Source Tools
 

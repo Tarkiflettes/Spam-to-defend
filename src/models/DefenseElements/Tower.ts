@@ -18,8 +18,6 @@ export class Tower extends Defense {
         this.price = stats.price;
         this.timeToReload = stats.timeToReload;
         this.range = stats.range;
-        
-        this.setmaxHealth(2, true);
 
         let size = 20;
         var rect = new PIXI.Graphics();

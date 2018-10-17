@@ -16,6 +16,8 @@ export class KeyFactory {
     }
 
     public static freeKey(key: Key): void {
+        key.press = undefined;
+        key.release = undefined;
         let index = this.usedKeys.indexOf(key);
         if (index > -1)
             this.usedKeys.splice(index, 1);

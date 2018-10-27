@@ -18,26 +18,28 @@ export class Tower extends Defense {
         this.price = stats.price;
         this.timeToReload = stats.timeToReload;
         this.range = stats.range;
-
-        let size = 20;
-        var rect = new PIXI.Graphics();
-        rect.beginFill(0xe74c3c, 1);
-        rect.drawRect(-size / 2, -size / 2, size, size);
-
-        var style = new PIXI.TextStyle({
-            fontSize: 10,
-        });
-        var key = new PIXI.Text(this.key.char, style);
-        key.x = -5;
-        key.y = -5;
-
-        rect.addChild(key)
-
-        this.addChild(rect);
     }
 
     public destroy(): void {
         super.destroy();
+    }
+
+    draw(): void {
+        let color = 0xe74c3c;
+        let bodyColor = 0xb62616;
+        let size = 40;
+
+        var rect = new PIXI.Graphics();
+        rect.beginFill(bodyColor, 1);
+        rect.drawRoundedRect(-size / 2, -size / 2, size, size, 10);
+        this.addChild(rect);
+
+        var rect = new PIXI.Graphics();
+        rect.beginFill(color, 1);
+        rect.drawRect(size / 2, -size / 4, size / 2, size / 2);
+        this.addChild(rect);
+
+        this.keyText.anchor.set(0.5);
     }
 
     active(): void {
@@ -69,7 +71,8 @@ export class Tower extends Defense {
         if (this.target === undefined)
             return;
         let angleToCastle = Transform.angleBetweenTwoObject(this, this.target);
-        Transform.rotate(this, angleToCastle)
+        Transform.rotate(this, angleToCastle);
+        Transform.rotate(this.keyText, -angleToCastle)
     }
 
 }

@@ -14,28 +14,25 @@ export class Wall extends Defense {
         this.price = stats.price;
         this.timeToReload = stats.timeToReload;
         this.force = stats.force;
-
-        let size = 20;
-        var rect = new PIXI.Graphics();
-        rect.beginFill(0xf1c40f, 1);
-        rect.drawRect(-size / 2, -size / 2, size, size);
-
-        var style = new PIXI.TextStyle({
-            fontSize: 10,
-        })
-        var key = new PIXI.Text(this.key.char, style);
-        key.x = -5;
-        key.y = -5;
-
-        rect.addChild(key)
-
-        this.addChild(rect);
     }
 
     public destroy(): void {
         super.destroy();
     }
 
+    draw(): void {
+        let color = 0xf1c40f;
+        let size = 20;
+
+        var rect = new PIXI.Graphics();
+        rect.beginFill(color, 1);
+        rect.drawRect(-size / 8, -size / 2, size * 4, size);
+        this.addChild(rect);
+
+        this.keyText.anchor.set(0.5);
+        this.keyText.x = size * 2;
+    }
+    
     active(): void {
         let enemiesList = GameManager.currentView.collideEnemies(this);
         for (let i = 0; i < enemiesList.length; i++) {

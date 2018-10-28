@@ -8,17 +8,19 @@ export class Castle extends Element {
         
         let stats = balancing.element.castle;
         this.setmaxHealth(stats.maxHealth, true);
-
-        let size = 50;
-        var rect = new PIXI.Graphics();
-        rect.beginFill(0x2c3e50, 1);
-        rect.drawRect(-size / 2, -size / 2, size, size);
-
-        this.addChild(rect);
     }
 
     public destroy(): void {
         super.destroy();
+    }
+    
+    draw(): void {
+        let size = 100;
+
+        var rect = new PIXI.Graphics();
+        rect.beginFill(0x2c3e50, 1);
+        rect.drawRect(-size / 2, -size / 2, size, size);
+        this.addChild(rect);
     }
 
     public start(): void {

@@ -33,6 +33,9 @@ export class Enemy extends Element {
         super.destroy();
     }
 
+    draw(): void {
+    }
+    
     public start(): void {
         if (GameManager.currentView.castle != undefined) {
             let angleToCastle = Transform.angleBetweenTwoObject(this, GameManager.currentView.castle);

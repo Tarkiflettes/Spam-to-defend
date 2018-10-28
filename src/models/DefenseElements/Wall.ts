@@ -29,6 +29,8 @@ export class Wall extends Defense {
         rect.drawRect(-size / 8, -size / 2, size * 4, size);
         this.addChild(rect);
 
+        super.draw();
+        
         this.keyText.anchor.set(0.5);
         this.keyText.x = size * 2;
     }

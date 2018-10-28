@@ -27,6 +27,9 @@ export class Bullet extends Element {
         super.destroy();
     }
 
+    draw(): void {
+    }
+
     public start(): void {
     }
 

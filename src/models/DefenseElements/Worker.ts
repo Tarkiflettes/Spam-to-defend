@@ -42,6 +42,8 @@ export class Worker extends Defense {
         circle.drawCircle(0, size * space, size);
         this.addChild(circle);
         
+        super.draw();
+        
         this.keyText.anchor.set(0.5);
     }
 

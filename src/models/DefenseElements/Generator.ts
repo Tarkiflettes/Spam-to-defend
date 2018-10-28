@@ -43,6 +43,8 @@ export class Generator extends Defense {
         circle.drawCircle(0, 0, size);
         this.addChild(circle);
 
+        super.draw();
+        
         this.keyText.anchor.set(0.5);
     }
 

@@ -8,8 +8,8 @@ export abstract class Defense extends Element {
 
     public price: number;
     public timeToReload: number; // delayInMilliseconds
-    protected key: Key;
-    protected keyText: PIXI.Text;
+    protected key!: Key;
+    protected keyText!: PIXI.Text;
     private canBeUsed: boolean = true;
 
     constructor() {
@@ -19,16 +19,17 @@ export abstract class Defense extends Element {
         this.setmaxHealth(stats.maxHealth, true);
         this.price = stats.price;
         this.timeToReload = stats.timeToReload;
+    }
 
+    draw(): void {
         this.key = KeyFactory.getKey(this.keydownHandler.bind(this), undefined);
+
         var style = new PIXI.TextStyle({
             fontSize: 20,
             stroke: '#ffffff',
             strokeThickness: 5,
         })
         this.keyText = new PIXI.Text(this.key.char, style);
-
-        this.draw();
         this.addChild(this.keyText)
     }
 
@@ -36,8 +37,6 @@ export abstract class Defense extends Element {
         super.destroy();
         KeyFactory.freeKey(this.key);
     }
-
-    abstract draw(): void;
 
     abstract active(): void;
 

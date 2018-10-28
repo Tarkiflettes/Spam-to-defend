@@ -17,11 +17,15 @@ export abstract class Element extends Container {
         this.health = this.maxHealth;
         this.dieHandler = new Event();
         this.interactive = true;
+        
+        this.draw();
     }
 
     public destroy(): void {
         super.destroy();
     }
+
+    abstract draw(): void;
 
     public addHealth(amount: number): void {
         this.health += amount;

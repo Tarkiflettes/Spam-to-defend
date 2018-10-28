@@ -39,6 +39,8 @@ export class Tower extends Defense {
         rect.drawRect(size / 2, -size / 4, size / 2, size / 2);
         this.addChild(rect);
 
+        super.draw();
+        
         this.keyText.anchor.set(0.5);
     }
 

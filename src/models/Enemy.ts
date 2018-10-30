@@ -4,6 +4,7 @@ import { GameManager } from "../managers/GameManager";
 import { Defense } from "./Defense";
 import { Castle } from "./DefenseElements/Castle";
 import { balancing } from "../options/Balancing";
+import * as particles from 'pixi-particles';
 
 export class Enemy extends Element {
 
@@ -54,6 +55,8 @@ export class Enemy extends Element {
     private attack(defense: Defense | Castle): void {
         if (!this.canAttack)
             return;
+            
+        let myEmitter:particles.Emitter = new particles.Emitter(this, undefined, undefined);
         this.canAttack = false;
         defense.takeDamage(this.force);
         setTimeout(() => this.canAttack = true, this.timeToReload);

@@ -4,6 +4,7 @@
   "description": "[Open Jam 2018](https://itch.io/jam/open-jam-2018) - SPAM TO WIN!",
   "main": "./index.html",
   "dependencies": {
+    "pixi-particles": "^3.1.0",
     "pixi.js": "^4.8.2"
   },
   "devDependencies": {

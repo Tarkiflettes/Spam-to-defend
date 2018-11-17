@@ -55,8 +55,9 @@ export class Enemy extends Element {
     private attack(defense: Defense | Castle): void {
         if (!this.canAttack)
             return;
-            
-        let myEmitter:particles.Emitter = new particles.Emitter(this, undefined, undefined);
+
+        let myEmitter = new particles.Emitter(this, undefined, undefined);
+        
         this.canAttack = false;
         defense.takeDamage(this.force);
         setTimeout(() => this.canAttack = true, this.timeToReload);

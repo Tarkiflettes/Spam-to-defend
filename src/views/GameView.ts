@@ -15,6 +15,9 @@ export class GameView extends Container {
     public defense: Defense[];
     public enemies: Enemy[];
     public uiManager: UIManager | undefined;
+
+    private startingTime: Date;
+    private currentTime: string;
     private ticker: ticker.Ticker;
 
     constructor() {
@@ -23,6 +26,11 @@ export class GameView extends Container {
         this.interactive = true;
 
         this.hitArea = new PIXI.Rectangle(0, 0, options.width, options.height);
+
+        this.startingTime = new Date();
+        console.log(this.startingTime.getHours());
+        console.log(new Date().getHours());
+        this.currentTime = "00:00:00";
 
         this.defense = [];
         this.enemies = [];
@@ -35,22 +43,31 @@ export class GameView extends Container {
         this.ticker = new ticker.Ticker();
         this.ticker.add(this.update.bind(this));
         this.ticker.start();
-
-        this.ticker = new ticker.Ticker();
-        this.ticker.add(this.update.bind(this));
-        this.ticker.start();
     }
 
     public destroy(): void {
     }
 
     private update(deltatime: number): void {
+        this.setCurrentTime();
         for (let i = 0; i < this.children.length; i++) {
             let child = this.children[i] as Element;
             if (child !== undefined && typeof child.update === "function") {
                 child.update(deltatime);
             }
         }
+    }
+
+    private setCurrentTime(): void {
+        let tempDate = new Date(1970, 0, 1);
+        tempDate.setMilliseconds(Math.abs(new Date().getTime() - this.startingTime.getTime()));
+        this.currentTime = this.twoDigits(tempDate.getHours()) + ":" + this.twoDigits(tempDate.getMinutes()) + ":" + this.twoDigits(tempDate.getSeconds());
+        if (this.uiManager != undefined)
+            this.uiManager.setTime(this.currentTime);
+    }
+
+    private twoDigits(n: number): string {
+        return (n < 10 ? '0' : '') + n;
     }
 
     public collideDefense(enemy: Enemy): Defense | Castle | undefined {

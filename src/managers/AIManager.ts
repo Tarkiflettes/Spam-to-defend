@@ -7,8 +7,8 @@ import { balancing } from "../options/Balancing";
 export class AIManager {
 
     constructor() {
-        // var interval = setInterval(this.spawnIA.bind(this), balancing.ia.interval);
-        this.spawnIA();
+        var interval = setInterval(this.spawnIA.bind(this), balancing.ia.interval);
+        // this.spawnIA();
     }
 
     public destroy(): void {

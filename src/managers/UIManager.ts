@@ -36,6 +36,15 @@ export class UIManager extends Container {
     public destroy(): void {
     }
 
+    public setTime(time: string): void {
+        this.removeChild(this.time);
+        this.time = new PIXI.Text(time);
+        this.time.anchor.set(0.5, 0);
+        this.time.x = options.width / 2;
+        this.time.y = 0;
+        this.addChild(this.time);
+    }
+
     private setDefenseItems(): void {
         let currentX = 0;
         for (let item in DefenseEnum) {

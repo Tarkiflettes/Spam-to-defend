@@ -6,6 +6,7 @@ import { DefenseEnum } from "../enums/DefenseEnum";
 
 export class UIManager extends Container {
 
+    private button: PIXI.Graphics;
     private time: PIXI.Text;
     private coins: PIXI.Text;
     private defenseItems: DefenseItem[];
@@ -25,6 +26,20 @@ export class UIManager extends Container {
         this.coins.y = options.height;
         this.addChild(this.coins);
 
+        this.button = new PIXI.Graphics();
+        this.button.beginFill(0x34495e, 0.4);
+        this.button.lineStyle(2, 0x34495e, 1);
+        this.button.drawRect(0, 0, 50, 50);
+        this.button.interactive = true;
+        this.button.buttonMode = true;
+        this.button
+        .on('pointerdown', this.pause)
+        .on('pointerup', () => {})
+        .on('pointerupoutside', () => {})
+        .on('pointerover', () => {})
+        .on('pointerout', () => {});
+        this.addChild(this.button);
+        
         this.defenseItems = new Array();
         this.setDefenseItems();
         this.onselectedItemChange();
@@ -34,6 +49,11 @@ export class UIManager extends Container {
     }
 
     public destroy(): void {
+    }
+
+    private pause(): void {
+        console.log("pause");
+        GameManager.currentView.pause();
     }
 
     public setTime(time: string): void {

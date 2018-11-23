@@ -48,6 +48,10 @@ export class GameView extends Container {
     public destroy(): void {
     }
 
+    public pause() {
+        this.ticker.stop();
+    }
+
     private update(deltatime: number): void {
         this.setCurrentTime();
         for (let i = 0; i < this.children.length; i++) {

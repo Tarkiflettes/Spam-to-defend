@@ -3,19 +3,22 @@ import { balancing } from "../options/Balancing";
 import { options } from "../options/Options";
 import { random } from "../Utils/Math";
 import { Event } from "../Event/Event";
-import { GameManager } from "./GameManager";
 
 export class AIManager {
+
 
     public readonly addEnemyHandler: Event;
 
     constructor() {
         this.addEnemyHandler = new Event();
-        var interval = setInterval(this.spawnIA.bind(this), balancing.ia.interval);
-        // this.spawnIA();
+        // var interval = setInterval(this.spawnIA.bind(this), balancing.ia.interval);
     }
 
     public destroy(): void {
+    }
+
+    public start(): void {
+        this.spawnIA();
     }
 
     private randomSpawn(): void {
@@ -49,8 +52,8 @@ export class AIManager {
             default:
                 break;
         }
-        enemy.start();
         this.addEnemyHandler.trigger(enemy);
+        enemy.start();
     }
 
 }

@@ -1,12 +1,16 @@
-import { GameManager } from "./GameManager"
 import { Enemy } from "../models/Enemy";
+import { balancing } from "../options/Balancing";
 import { options } from "../options/Options";
 import { random } from "../Utils/Math";
-import { balancing } from "../options/Balancing";
+import { Event } from "../Event/Event";
+import { GameManager } from "./GameManager";
 
 export class AIManager {
 
+    public readonly addEnemyHandler: Event;
+
     constructor() {
+        this.addEnemyHandler = new Event();
         var interval = setInterval(this.spawnIA.bind(this), balancing.ia.interval);
         // this.spawnIA();
     }
@@ -16,13 +20,13 @@ export class AIManager {
 
     private randomSpawn(): void {
         let spawn = random(0, balancing.ia.random);
-        if (spawn != 0)
+        if (spawn != 0) {
             return;
+        }
         this.spawnIA();
     }
 
     private spawnIA(): void {
-
         let enemy = new Enemy();
         let side = random(0, 3); // 0: top | 1: right | 2: bottom | 3: left
         switch (side) {
@@ -46,7 +50,7 @@ export class AIManager {
                 break;
         }
         enemy.start();
-        GameManager.currentView.addEnemy(enemy);
+        this.addEnemyHandler.trigger(enemy);
     }
 
 }

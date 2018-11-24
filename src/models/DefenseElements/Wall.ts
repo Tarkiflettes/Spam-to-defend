@@ -1,6 +1,7 @@
 import { Defense } from "../Defense";
 import { GameManager } from "../../managers/GameManager";
 import { balancing } from "../../options/Balancing";
+import { Enemy } from "../Enemy";
 
 export class Wall extends Defense {
 
@@ -36,11 +37,11 @@ export class Wall extends Defense {
     }
     
     active(): void {
-        let enemiesList = GameManager.currentView.collideEnemies(this);
-        for (let i = 0; i < enemiesList.length; i++) {
-            let enemy = enemiesList[i];
-            enemy.takeDamage(this.force);
-        }
+        // let enemiesList = GameManager.getInstance().currentView.collideEnemies(this);
+        // for (let i = 0; i < enemiesList.length; i++) {
+        //     let enemy = enemiesList[i];
+        //     enemy.takeDamage(this.force);
+        // }
     }
 
     public start(): void {

@@ -1,13 +1,14 @@
 import { interaction } from "pixi.js"
-import { GameManager } from "./GameManager"
 import { DefenseEnum } from "../enums/DefenseEnum"
 import { DefenseFactory } from "../factories/DefenseFactory";
 import { Event } from "../Event/Event";
 import { balancing } from "../options/Balancing";
+import { NewDefense } from "../models/NewDefense";
 
 export class PlayerManager {
 
     public coins: number;
+    public readonly addDefenseHandler: Event;
     public readonly coinsHandler: Event;
     public readonly selectedItemHandler: Event;
     public selectedItem: DefenseEnum = DefenseEnum.Tower;
@@ -16,10 +17,9 @@ export class PlayerManager {
 
         this.coins = balancing.coins;
         
+        this.addDefenseHandler = new Event();
         this.coinsHandler = new Event();
         this.selectedItemHandler = new Event();
-
-        GameManager.currentView.on("mousedown", this.onMouseDown.bind(this));
 
         window.addEventListener(
             "keydown", this.keydownHandler.bind(this), false
@@ -45,11 +45,13 @@ export class PlayerManager {
             return;
         if (newDefense.price > this.coins)
             return;
-        let result = GameManager.currentView.addDefense(newDefense, x, y);
-        if (result) {
-            this.coins -= newDefense.price;
-            this.coinsHandler.trigger();
-        }
+        
+        this.addDefenseHandler.trigger(new NewDefense(newDefense, x, y));
+        // let result = GameManager.getInstance().currentView.addDefense(newDefense, x, y);
+        // if (result) {
+        //     this.coins -= newDefense.price;
+        //     this.coinsHandler.trigger();
+        // }
     }
 
     private keydownHandler(event: any): void {
@@ -63,7 +65,7 @@ export class PlayerManager {
             this.selectedItem = DefenseEnum.Wall;
         }
         event.preventDefault();
-        this.selectedItemHandler.trigger();
+        this.selectedItemHandler.trigger(this.selectedItem);
     }
 
 }

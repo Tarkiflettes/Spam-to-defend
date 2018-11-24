@@ -17,7 +17,7 @@ class Main {
             });
 
         this.gameManager = new GameManager();
-        this.stage = GameManager.currentView;
+        this.stage = this.gameManager.currentView;
 
         document.body.appendChild(this.renderer.view);
 

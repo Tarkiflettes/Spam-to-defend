@@ -8,6 +8,7 @@ import { Transform } from "../utils/Transform";
 import { options } from "../options/Options";
 import { UIManager } from "../managers/UIManager";
 import { Bullet } from "../models/DefenseElements/Bullet";
+import { NewDefense } from "../models/NewDefense";
 
 export class GameView extends Container {
 
@@ -28,8 +29,6 @@ export class GameView extends Container {
         this.hitArea = new PIXI.Rectangle(0, 0, options.width, options.height);
 
         this.startingTime = new Date();
-        console.log(this.startingTime.getHours());
-        console.log(new Date().getHours());
         this.currentTime = "00:00:00";
 
         this.defense = [];
@@ -104,6 +103,10 @@ export class GameView extends Container {
         return enemiesList;
     }
 
+    public addNewDefense(newDefense: NewDefense): boolean {
+        return this.addDefense(newDefense.defense, newDefense.x, newDefense.y);
+    }
+
     public addDefense(defense: Defense, x: number, y: number): boolean {
         defense.x = x;
         defense.y = y;
@@ -169,7 +172,7 @@ export class GameView extends Container {
         return nearestEnemy;
     }
 
-    nearestDefenseList(element: Element, range: number = Number.MAX_VALUE): Defense[] {
+    public nearestDefenseList(element: Element, range: number = Number.MAX_VALUE): Defense[] {
         let defenseList = new Array();
         for (let i = 0; i < this.defense.length; i++) {
             let defense = this.defense[i];

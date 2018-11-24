@@ -48,11 +48,11 @@ export class Worker extends Defense {
     }
 
     active(): void {
-        let defenseList = GameManager.currentView.nearestDefenseList(this, this.range);
-        for (let i = 0; i < defenseList.length; i++) {
-            let defense = defenseList[i];
-            defense.addHealth(this.regenerationHealth);
-        }
+        // let defenseList = GameManager.getInstance().currentView.nearestDefenseList(this, this.range);
+        // for (let i = 0; i < defenseList.length; i++) {
+        //     let defense = defenseList[i];
+        //     defense.addHealth(this.regenerationHealth);
+        // }
     }
 
     public start(): void {

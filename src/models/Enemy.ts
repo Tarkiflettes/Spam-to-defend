@@ -38,18 +38,19 @@ export class Enemy extends Element {
     }
     
     public start(): void {
-        if (GameManager.currentView.castle != undefined) {
-            let angleToCastle = Transform.angleBetweenTwoObject(this, GameManager.currentView.castle);
-            Transform.rotate(this, angleToCastle)
-        }
+        // let castle = GameManager.getInstance().currentView.castle;
+        // if (castle != undefined) {
+        //     let angleToCastle = Transform.angleBetweenTwoObject(this, castle);
+        //     Transform.rotate(this, angleToCastle)
+        // }
     }
 
     public update(deltatime: number): void {
-        var defense = GameManager.currentView.collideDefense(this);
-        if (defense == undefined)
-            Transform.moveForward(this, this.speed * deltatime);
-        else
-            this.attack(defense);
+        // var defense = GameManager.getInstance().currentView.collideDefense(this);
+        // if (defense == undefined)
+        //     Transform.moveForward(this, this.speed * deltatime);
+        // else
+        //     this.attack(defense);
     }
 
     private attack(defense: Defense | Castle): void {

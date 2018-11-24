@@ -49,7 +49,7 @@ export class Generator extends Defense {
     }
 
     active(): void {
-        GameManager.playerManager.addCoins(this.coins);
+        // GameManager.getInstance().playerManager.addCoins(this.coins);
     }
 
     public start(): void {

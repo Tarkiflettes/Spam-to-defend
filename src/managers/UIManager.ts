@@ -20,7 +20,7 @@ export class UIManager extends Container {
         this.time.y = 0;
         this.addChild(this.time);
 
-        this.coins = new PIXI.Text(String(GameManager.playerManager.coins));
+        this.coins = new PIXI.Text("0");
         this.coins.anchor.set(1, 1);
         this.coins.x = options.width;
         this.coins.y = options.height;
@@ -42,10 +42,6 @@ export class UIManager extends Container {
         
         this.defenseItems = new Array();
         this.setDefenseItems();
-        this.onselectedItemChange();
-
-        GameManager.playerManager.coinsHandler.on(this.onCoinsChange.bind(this));
-        GameManager.playerManager.selectedItemHandler.on(this.onselectedItemChange.bind(this));
     }
 
     public destroy(): void {
@@ -53,7 +49,7 @@ export class UIManager extends Container {
 
     private pause(): void {
         console.log("pause");
-        GameManager.currentView.pause();
+        // GameManager.getInstance().currentView.pause();
     }
 
     public setTime(time: string): void {
@@ -79,16 +75,16 @@ export class UIManager extends Container {
         }
     }
 
-    private onCoinsChange(): void {
-        this.coins.text = String(GameManager.playerManager.coins);
+    public onCoinsChange(coins: number): void {
+        this.coins.text = String(coins);
     }
 
-    private onselectedItemChange() {
+    public onselectedItemChange(selectedItem: DefenseEnum) {
         for (let i = 0; i < this.defenseItems.length; i++) {
             let item = this.defenseItems[i];
             item.unselect();
         }
-        this.defenseItems[GameManager.playerManager.selectedItem].select();
+        this.defenseItems[selectedItem].select();
     }
 
 }

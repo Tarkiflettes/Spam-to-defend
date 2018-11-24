@@ -1,7 +1,7 @@
 import { Defense } from "../Defense";
-import { GameManager } from "../../managers/GameManager";
 import { balancing } from "../../options/Balancing";
 import { Transform } from "../../utils/Transform";
+import { Container } from "pixi.js";
 
 export class Generator extends Defense {
 
@@ -22,26 +22,7 @@ export class Generator extends Defense {
     }
 
     public draw(): void {
-        let color = 0x1f5fc7;
-        let bodyColor = 0x11356e;
-        let size = 20;
-
-        var rect = new PIXI.Graphics();
-        rect.beginFill(color, 1);
-        rect.drawRect(-size * 3 / 2, -size / 2, size * 3, size);
-        Transform.rotate(rect, 45, true);
-        this.addChild(rect);
-
-        var rect = new PIXI.Graphics();
-        rect.beginFill(color, 1);
-        rect.drawRect(-size * 3 / 2, -size / 2, size * 3, size);
-        Transform.rotate(rect, -45, true);
-        this.addChild(rect);
-
-        var circle = new PIXI.Graphics();
-        circle.beginFill(bodyColor, 1);
-        circle.drawCircle(0, 0, size);
-        this.addChild(circle);
+        this.addChild(Generator.getDesign());
 
         super.draw();
 
@@ -56,6 +37,33 @@ export class Generator extends Defense {
     }
 
     public update(deltatime: number): void {
+    }
+
+    public static getDesign(): Container {
+        let container = new Container();
+
+        let color = 0x1f5fc7;
+        let bodyColor = 0x11356e;
+        let size = 20;
+
+        var rect = new PIXI.Graphics();
+        rect.beginFill(color, 1);
+        rect.drawRect(-size * 3 / 2, -size / 2, size * 3, size);
+        Transform.rotate(rect, 45, true);
+        container.addChild(rect);
+
+        var rect = new PIXI.Graphics();
+        rect.beginFill(color, 1);
+        rect.drawRect(-size * 3 / 2, -size / 2, size * 3, size);
+        Transform.rotate(rect, -45, true);
+        container.addChild(rect);
+
+        var circle = new PIXI.Graphics();
+        circle.beginFill(bodyColor, 1);
+        circle.drawCircle(0, 0, size);
+        container.addChild(circle);
+
+        return container;
     }
 
 }

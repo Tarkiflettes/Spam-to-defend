@@ -5,6 +5,7 @@ import { Transform } from "../../utils/Transform";
 import { Bullet } from "./Bullet";
 import { balancing } from "../../options/Balancing";
 import { GameView } from "../../views/GameView";
+import { Container } from "pixi.js";
 
 export class Tower extends Defense {
 
@@ -26,19 +27,7 @@ export class Tower extends Defense {
     }
 
     draw(): void {
-        let color = 0xe74c3c;
-        let bodyColor = 0xb62616;
-        let size = 40;
-
-        var rect = new PIXI.Graphics();
-        rect.beginFill(bodyColor, 1);
-        rect.drawRoundedRect(-size / 2, -size / 2, size, size, 10);
-        this.addChild(rect);
-
-        var rect = new PIXI.Graphics();
-        rect.beginFill(color, 1);
-        rect.drawRect(size / 2, -size / 4, size / 2, size / 2);
-        this.addChild(rect);
+        this.addChild(Tower.getDesign());
 
         super.draw();
         
@@ -76,6 +65,26 @@ export class Tower extends Defense {
         let angleToCastle = Transform.angleBetweenTwoObject(this, this.target);
         Transform.rotate(this, angleToCastle);
         Transform.rotate(this.keyText, -angleToCastle)
+    }
+
+    public static getDesign(): Container {
+        let container = new Container();
+
+        let color = 0xe74c3c;
+        let bodyColor = 0xb62616;
+        let size = 40;
+
+        var rect = new PIXI.Graphics();
+        rect.beginFill(bodyColor, 1);
+        rect.drawRoundedRect(-size / 2, -size / 2, size, size, 10);
+        container.addChild(rect);
+
+        var rect = new PIXI.Graphics();
+        rect.beginFill(color, 1);
+        rect.drawRect(size / 2, -size / 4, size / 2, size / 2);
+        container.addChild(rect);
+
+        return container;
     }
 
 }

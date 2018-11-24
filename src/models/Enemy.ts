@@ -1,10 +1,10 @@
 import { Element } from "./Element";
 import { Transform } from "../utils/Transform";
-import { GameManager } from "../managers/GameManager";
 import { Defense } from "./Defense";
 import { Castle } from "./DefenseElements/Castle";
 import { balancing } from "../options/Balancing";
 import * as particles from 'pixi-particles';
+import { Container } from "pixi.js";
 
 export class Enemy extends Element {
 
@@ -21,13 +21,6 @@ export class Enemy extends Element {
         this.force = stats.force;
         this.speed = stats.speed;
         this.timeToReload = stats.timeToReload;
-
-        let size = 10;
-        var circle = new PIXI.Graphics();
-        circle.beginFill(0x000000, 1);
-        circle.drawCircle(-size / 4, -size / 4, size);
-
-        this.addChild(circle);
     }
 
     public destroy(): void {
@@ -35,6 +28,7 @@ export class Enemy extends Element {
     }
 
     draw(): void {
+        this.addChild(Enemy.getDesign());
     }
     
     public start(): void {
@@ -62,6 +56,18 @@ export class Enemy extends Element {
         this.canAttack = false;
         defense.takeDamage(this.force);
         setTimeout(() => this.canAttack = true, this.timeToReload);
+    }
+    
+    public static getDesign(): Container {
+        let container = new Container();
+
+        let size = 10;
+        var circle = new PIXI.Graphics();
+        circle.beginFill(0x000000, 1);
+        circle.drawCircle(-size / 4, -size / 4, size);
+        container.addChild(circle);
+
+        return container;
     }
 
 }

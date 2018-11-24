@@ -1,6 +1,6 @@
 import { Defense } from "../Defense";
-import { GameManager } from "../../managers/GameManager";
 import { balancing } from "../../options/Balancing";
+import { Container } from "pixi.js";
 
 export class Worker extends Defense {
 
@@ -23,25 +23,8 @@ export class Worker extends Defense {
     }
 
     draw(): void {
-        let color = 0x8e44ad;
-        let size = 7;
-        let space = 4;
+        this.addChild(Worker.getDesign());
 
-        var circle = new PIXI.Graphics();
-        circle.beginFill(color, 1);
-        circle.drawCircle(size * space, size, size);
-        this.addChild(circle);
-
-        var circle = new PIXI.Graphics();
-        circle.beginFill(color, 1);
-        circle.drawCircle(-size * space, 0, size);
-        this.addChild(circle);
-
-        var circle = new PIXI.Graphics();
-        circle.beginFill(color, 1);
-        circle.drawCircle(0, size * space, size);
-        this.addChild(circle);
-        
         super.draw();
         
         this.keyText.anchor.set(0.5);
@@ -59,6 +42,31 @@ export class Worker extends Defense {
     }
 
     public update(deltatime: number): void {
+    }
+    
+    public static getDesign(): Container {
+        let container = new Container();
+
+        let color = 0x8e44ad;
+        let size = 7;
+        let space = 4;
+
+        var circle = new PIXI.Graphics();
+        circle.beginFill(color, 1);
+        circle.drawCircle(size * space, size, size);
+        container.addChild(circle);
+
+        var circle = new PIXI.Graphics();
+        circle.beginFill(color, 1);
+        circle.drawCircle(-size * space, 0, size);
+        container.addChild(circle);
+
+        var circle = new PIXI.Graphics();
+        circle.beginFill(color, 1);
+        circle.drawCircle(0, size * space, size);
+        container.addChild(circle);
+
+        return container;
     }
 
 }

@@ -1,7 +1,6 @@
 import { Defense } from "../Defense";
-import { GameManager } from "../../managers/GameManager";
 import { balancing } from "../../options/Balancing";
-import { Enemy } from "../Enemy";
+import { Container } from "pixi.js";
 
 export class Wall extends Defense {
 
@@ -22,13 +21,8 @@ export class Wall extends Defense {
     }
 
     draw(): void {
-        let color = 0xf1c40f;
         let size = 20;
-
-        var rect = new PIXI.Graphics();
-        rect.beginFill(color, 1);
-        rect.drawRect(-size / 8, -size / 2, size * 4, size);
-        this.addChild(rect);
+        this.addChild(Wall.getDesign());
 
         super.draw();
         
@@ -48,6 +42,20 @@ export class Wall extends Defense {
     }
 
     public update(deltatime: number): void {
+    }
+    
+    public static getDesign(): Container {
+        let container = new Container();
+
+        let color = 0xf1c40f;
+        let size = 20;
+
+        var rect = new PIXI.Graphics();
+        rect.beginFill(color, 1);
+        rect.drawRect(-size / 8, -size / 2, size * 4, size);
+        container.addChild(rect);
+
+        return container;
     }
 
 }

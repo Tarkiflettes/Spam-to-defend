@@ -1,8 +1,8 @@
 import { Container } from "pixi.js";
 import { options } from "../options/Options";
-import { GameManager } from "./GameManager";
 import { DefenseItem } from "../ui/DefenseItem";
 import { DefenseEnum } from "../enums/DefenseEnum";
+import { Event } from "../Event/Event";
 
 export class UIManager extends Container {
 
@@ -10,9 +10,12 @@ export class UIManager extends Container {
     private time: PIXI.Text;
     private coins: PIXI.Text;
     private defenseItems: DefenseItem[];
+    public readonly pauseHandler: Event;
 
     constructor() {
         super();
+
+        this.pauseHandler = new Event();
 
         this.time = new PIXI.Text('00:00:00');
         this.time.anchor.set(0.5, 0);
@@ -33,7 +36,7 @@ export class UIManager extends Container {
         this.button.interactive = true;
         this.button.buttonMode = true;
         this.button
-        .on('pointerdown', this.pause)
+        .on('pointerdown', this.pause.bind(this))
         .on('pointerup', () => {})
         .on('pointerupoutside', () => {})
         .on('pointerover', () => {})
@@ -48,8 +51,7 @@ export class UIManager extends Container {
     }
 
     private pause(): void {
-        console.log("pause");
-        // GameManager.getInstance().currentView.pause();
+        this.pauseHandler.trigger();
     }
 
     public setTime(time: string): void {

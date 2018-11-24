@@ -6,19 +6,24 @@ import { Event } from "../Event/Event";
 
 export class AIManager {
 
-
     public readonly addEnemyHandler: Event;
+    private interval: number | undefined;
 
     constructor() {
         this.addEnemyHandler = new Event();
-        // var interval = setInterval(this.spawnIA.bind(this), balancing.ia.interval);
     }
 
     public destroy(): void {
     }
 
     public start(): void {
-        this.spawnIA();
+        this.interval = setInterval(this.spawnIA.bind(this), balancing.ia.interval);
+        // this.spawnIA();
+    }
+
+    pause(): any {
+        if (this.interval !== undefined)
+            clearInterval(this.interval);
     }
 
     private randomSpawn(): void {

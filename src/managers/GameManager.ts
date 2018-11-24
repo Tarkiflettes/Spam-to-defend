@@ -10,7 +10,7 @@ export class GameManager {
     public aiManager: AIManager;
     public uiManager: UIManager;
 
-    public constructor() {
+    constructor() {
         this.currentView = new GameView();
         this.playerManager = new PlayerManager();
         this.aiManager = new AIManager();
@@ -30,9 +30,15 @@ export class GameManager {
         this.playerManager.addDefenseHandler.on(this.currentView.addNewDefense.bind(this.currentView));
         this.aiManager.addEnemyHandler.on(this.currentView.addEnemy.bind(this.currentView));
         this.currentView.coinsHandler.on(this.playerManager.addCoins.bind(this.playerManager));
+        this.uiManager.pauseHandler.on(this.pause.bind(this));
         this.playerManager.trigger();
     }
     
+    private pause() {
+        this.currentView.pause();
+        this.aiManager.pause();
+    }
+
     private reset() {
         this.currentView.destroy();
         this.playerManager.destroy();

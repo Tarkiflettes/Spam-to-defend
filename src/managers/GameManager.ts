@@ -29,7 +29,6 @@ export class GameManager {
     }
 
     private setHandlers(): void {
-        console.log("koukou "+this.playerManager.coins);
         this.currentView.on("mousedown", this.playerManager.onMouseDown.bind(this.playerManager));
         this.playerManager.coinsHandler.on(this.uiManager.onCoinsChange.bind(this.uiManager));
         this.playerManager.selectedItemHandler.on(this.uiManager.onselectedItemChange.bind(this).uiManager);

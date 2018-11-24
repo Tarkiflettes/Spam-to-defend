@@ -37,11 +37,11 @@ export class Wall extends Defense {
     }
     
     active(): void {
-        // let enemiesList = GameManager.getInstance().currentView.collideEnemies(this);
-        // for (let i = 0; i < enemiesList.length; i++) {
-        //     let enemy = enemiesList[i];
-        //     enemy.takeDamage(this.force);
-        // }
+        let enemiesList = this.getParent().collideEnemies(this);
+        for (let i = 0; i < enemiesList.length; i++) {
+            let enemy = enemiesList[i];
+            enemy.takeDamage(this.force);
+        }
     }
 
     public start(): void {

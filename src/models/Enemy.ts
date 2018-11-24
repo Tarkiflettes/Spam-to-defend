@@ -38,7 +38,7 @@ export class Enemy extends Element {
     }
     
     public start(): void {
-        // let castle = GameManager.getInstance().currentView.castle;
+        // let castle = this.getParent().castle;
         // if (castle != undefined) {
         //     let angleToCastle = Transform.angleBetweenTwoObject(this, castle);
         //     Transform.rotate(this, angleToCastle)
@@ -46,7 +46,7 @@ export class Enemy extends Element {
     }
 
     public update(deltatime: number): void {
-        // var defense = GameManager.getInstance().currentView.collideDefense(this);
+        // var defense = this.getParent().collideDefense(this);
         // if (defense == undefined)
         //     Transform.moveForward(this, this.speed * deltatime);
         // else

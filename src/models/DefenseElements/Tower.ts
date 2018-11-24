@@ -4,6 +4,7 @@ import { Enemy } from "../Enemy";
 import { Transform } from "../../utils/Transform";
 import { Bullet } from "./Bullet";
 import { balancing } from "../../options/Balancing";
+import { GameView } from "../../views/GameView";
 
 export class Tower extends Defense {
 
@@ -56,13 +57,13 @@ export class Tower extends Defense {
     }
 
     public update(deltatime: number): void {
-        // if (this.target !== undefined) {
-        //     this.aimTheTarget();
-        // } else {
-        //     this.target = GameManager.getInstance().currentView.nearestEnemy(this, this.range);
-        //     if (this.target !== undefined)
-        //         this.target.dieHandler.on(this.removeTarget.bind(this));
-        // }
+        if (this.target !== undefined) {
+            this.aimTheTarget();
+        } else {
+            this.target = this.getParent().nearestEnemy(this, this.range);
+            if (this.target !== undefined)
+                this.target.dieHandler.on(this.removeTarget.bind(this));
+        }
     }
 
     private removeTarget(): void {

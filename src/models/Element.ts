@@ -1,6 +1,7 @@
 import { Container } from "pixi.js"
 import { Event } from "../Event/Event";
 import { balancing } from "../options/Balancing";
+import { GameView } from "../views/GameView";
 
 export abstract class Element extends Container {
 
@@ -47,6 +48,10 @@ export abstract class Element extends Container {
 
     private die(): void {
         this.dieHandler.trigger(this);
+    }
+
+    protected getParent(): GameView {
+        return this.parent as GameView;
     }
 
     public abstract start(): void;

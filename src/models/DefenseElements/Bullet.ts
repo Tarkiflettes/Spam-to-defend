@@ -34,14 +34,14 @@ export class Bullet extends Element {
     }
 
     public update(deltatime: number): void {
-        // Transform.moveForward(this, this.speed * deltatime);
+        Transform.moveForward(this, this.speed * deltatime);
 
-        // let enemy = GameManager.getInstance().currentView.collideEnemy(this);
-        // if (enemy !== undefined) {
-        //     enemy.takeDamage(this.force);
-        //     this.dieHandler.trigger();
-        //     this.parent.removeChild(this);
-        // }
+        let enemy = this.getParent().collideEnemy(this);
+        if (enemy !== undefined) {
+            enemy.takeDamage(this.force);
+            this.dieHandler.trigger();
+            this.parent.removeChild(this);
+        }
     }
 
 }

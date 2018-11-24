@@ -16,7 +16,7 @@ export class PlayerManager {
     constructor() {
 
         this.coins = balancing.coins;
-        
+
         this.addDefenseHandler = new Event();
         this.coinsHandler = new Event();
         this.selectedItemHandler = new Event();
@@ -36,7 +36,7 @@ export class PlayerManager {
 
     public addCoins(amount: number): void {
         this.coins += amount;
-        this.coinsHandler.trigger();
+        this.coinsHandler.trigger(this.coins);
     }
 
     public setDefense(x: number, y: number): void {
@@ -45,13 +45,8 @@ export class PlayerManager {
             return;
         if (newDefense.price > this.coins)
             return;
-        
+
         this.addDefenseHandler.trigger(new NewDefense(newDefense, x, y));
-        // let result = GameManager.getInstance().currentView.addDefense(newDefense, x, y);
-        // if (result) {
-        //     this.coins -= newDefense.price;
-        //     this.coinsHandler.trigger();
-        // }
     }
 
     private keydownHandler(event: any): void {
@@ -65,6 +60,11 @@ export class PlayerManager {
             this.selectedItem = DefenseEnum.Wall;
         }
         event.preventDefault();
+        this.selectedItemHandler.trigger(this.selectedItem);
+    }
+
+    public trigger(): void {
+        this.coinsHandler.trigger(this.coins);
         this.selectedItemHandler.trigger(this.selectedItem);
     }
 

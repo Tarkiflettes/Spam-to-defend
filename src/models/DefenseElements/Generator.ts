@@ -44,12 +44,12 @@ export class Generator extends Defense {
         this.addChild(circle);
 
         super.draw();
-        
+
         this.keyText.anchor.set(0.5);
     }
 
     active(): void {
-        // GameManager.getInstance().playerManager.addCoins(this.coins);
+        this.getParent().addCoins(this.coins);
     }
 
     public start(): void {

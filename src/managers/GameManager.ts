@@ -29,6 +29,8 @@ export class GameManager {
         this.playerManager.selectedItemHandler.on(this.uiManager.onselectedItemChange.bind(this.uiManager));
         this.playerManager.addDefenseHandler.on(this.currentView.addNewDefense.bind(this.currentView));
         this.aiManager.addEnemyHandler.on(this.currentView.addEnemy.bind(this.currentView));
+        this.currentView.coinsHandler.on(this.playerManager.addCoins.bind(this.playerManager));
+        this.playerManager.trigger();
     }
     
     private reset() {

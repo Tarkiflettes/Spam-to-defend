@@ -9,6 +9,7 @@ import { options } from "../options/Options";
 import { UIManager } from "../managers/UIManager";
 import { Bullet } from "../models/DefenseElements/Bullet";
 import { NewDefense } from "../models/NewDefense";
+import { Event } from "../Event/Event";
 
 export class GameView extends Container {
 
@@ -16,6 +17,7 @@ export class GameView extends Container {
     public defense: Defense[];
     public enemies: Enemy[];
     public uiManager: UIManager | undefined;
+    public readonly coinsHandler: Event;
 
     private startingTime: Date;
     private currentTime: string;
@@ -25,6 +27,8 @@ export class GameView extends Container {
         super();
 
         this.interactive = true;
+
+        this.coinsHandler = new Event();
 
         this.hitArea = new PIXI.Rectangle(0, 0, options.width, options.height);
 
@@ -103,20 +107,22 @@ export class GameView extends Container {
         return enemiesList;
     }
 
-    public addNewDefense(newDefense: NewDefense): boolean {
+    public addNewDefense(newDefense: NewDefense): void {
         return this.addDefense(newDefense.defense, newDefense.x, newDefense.y);
     }
 
-    public addDefense(defense: Defense, x: number, y: number): boolean {
+    public addDefense(defense: Defense, x: number, y: number): void {
         defense.x = x;
         defense.y = y;
 
-        if (this.checkChildrenContainsPoint(defense))
-            return false;
+        if (this.checkChildrenContainsPoint(defense)) {
+            defense.destroy();
+            return;
+        }  
 
         this.addElement(defense);
         this.defense.push(defense);
-        return true;
+        this.addCoins(-defense.price);
     }
 
     public addEnemy(enemy: Enemy): void {
@@ -186,6 +192,10 @@ export class GameView extends Container {
     public setUI(uiManager: UIManager): void {
         this.uiManager = uiManager;
         this.addChild(this.uiManager);
+    }
+
+    public addCoins(amount: number): void {
+        this.coinsHandler.trigger(amount);
     }
 
 }
